@@ -1,0 +1,11 @@
+@charset "uft-8";
+*{
+	text-decoration: none;
+	
+}
+.hv :hover{
+	color: black ;
+}
+.ShadowHover :hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

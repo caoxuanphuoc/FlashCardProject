@@ -5,17 +5,19 @@ public class CollectionCard {
 	private Long UserId;
 	private String CollectionName;
 	private Long Rate;
-	private Long CardId;
+	private boolean IsDelete;
+	private int Status;
 	public CollectionCard() {
 		// TODO Auto-generated constructor stub
 	}
-	public CollectionCard(Long id, Long userId, String collectionName, Long rate, Long cardId) {
+	public CollectionCard(Long id, Long userId, String collectionName, Long rate, boolean isDelete) {
 		super();
 		Id = id;
 		UserId = userId;
 		CollectionName = collectionName;
 		Rate = rate;
-		CardId = cardId;
+		IsDelete = isDelete;
+		Status =1;
 	}
 	public Long getId() {
 		return Id;
@@ -41,11 +43,18 @@ public class CollectionCard {
 	public void setRate(Long rate) {
 		Rate = rate;
 	}
-	public Long getCardId() {
-		return CardId;
+	public boolean isIsDelete() {
+		return IsDelete;
 	}
-	public void setCardId(Long cardId) {
-		CardId = cardId;
+	public void setIsDelete(boolean isDelete) {
+		IsDelete = isDelete;
 	}
+	public int getStatus() {
+		return Status;
+	}
+	public void setStatus(int status) {
+		Status = status;
+	}
+	
 	
 }

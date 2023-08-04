@@ -4,19 +4,19 @@ public class Friend {
 	private Long Id;
 	private Long UserId;
 	private Long FriendId;
-	private Boolean IsFriend;
+	private boolean IsFriend;
+	private boolean IsDelete;
 	public Friend() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Friend(Long id, Long userId, Long friendId, Boolean isFriend) {
+	public Friend(Long id, Long userId, Long friendId, boolean isFriend, boolean isDelete) {
 		super();
 		Id = id;
 		UserId = userId;
 		FriendId = friendId;
 		IsFriend = isFriend;
+		IsDelete = isDelete;
 	}
-
 	public Long getId() {
 		return Id;
 	}
@@ -35,11 +35,19 @@ public class Friend {
 	public void setFriendId(Long friendId) {
 		FriendId = friendId;
 	}
-	public Boolean getIsFriend() {
+	public boolean isIsFriend() {
 		return IsFriend;
 	}
-	public void setIsFriend(Boolean isFriend) {
+	public void setIsFriend(boolean isFriend) {
 		IsFriend = isFriend;
 	}
+	public boolean isIsDelete() {
+		return IsDelete;
+	}
+	public void setIsDelete(boolean isDelete) {
+		IsDelete = isDelete;
+	}
+	
+	
 
 }

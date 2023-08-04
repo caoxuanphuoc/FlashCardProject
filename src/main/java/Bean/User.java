@@ -7,16 +7,30 @@ public class User {
 	private String LastName;
 	private String UserName;
 	private String PassWord;
+	private boolean IsDelete;
+	private boolean IsActive;
 	public User() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
-	public User(Long id, String firstName, String lastName, String userName, String passWord) {
+	// model user for session
+	public User(Long id, String firstName, String lastName, String userName,boolean isActive) {
+		super();
+		Id = id;
+		FirstName = firstName;
+		LastName = lastName;
+		UserName = userName;
+		IsActive = isActive;
+	}
+	public User(Long id, String firstName, String lastName, String userName, String passWord, boolean isDelete,
+			boolean isActive) {
 		super();
 		Id = id;
 		FirstName = firstName;
 		LastName = lastName;
 		UserName = userName;
 		PassWord = passWord;
+		IsDelete = isDelete;
+		IsActive = isActive;
 	}
 	public Long getId() {
 		return Id;
@@ -48,5 +62,18 @@ public class User {
 	public void setPassWord(String passWord) {
 		PassWord = passWord;
 	}
+	public boolean isIsDelete() {
+		return IsDelete;
+	}
+	public void setIsDelete(boolean isDelete) {
+		IsDelete = isDelete;
+	}
+	public boolean isIsActive() {
+		return IsActive;
+	}
+	public void setIsActive(boolean isActive) {
+		IsActive = isActive;
+	}
+	
 	
 }
