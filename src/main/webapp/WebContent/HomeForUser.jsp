@@ -1,3 +1,8 @@
+<%@page import="Bean.Dto.UserLoginDto"%>
+<%@page import="Bean.Dto.CollectionDtos.Collectiondto"%>
+<%@page import="Bean.CollectionCard"%>
+<%@page import="Bean.Dto.CollectionByDateDto"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,7 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="styleSheet" href="Style/bootstrap-5.0.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <link rel="styleSheet" href="Style/BaseStyle.css">
 </head>
 <body>
@@ -22,6 +29,8 @@
 					</div>
 					<div class="row ">
 						<%
+						ArrayList<Collectiondto>  ListCollection = (ArrayList<Collectiondto>)session.getAttribute("ListColletion");
+						UserLoginDto info = (UserLoginDto)  session.getAttribute("InfoUserLogin");
 						for (int i = 0; i < 3; i++) {
 						%>
 						<div class="col-sm-4 ">
@@ -29,10 +38,10 @@
 								class="text-decoration-none text-black">
 								<div class="card shadow-sm p-2 mb-3 bg-body rounded"
 									style="border-radius: 20px !important">
-									<div class="card-body p-3">
-										<h5 class="card-title">Reading</h5>
-										<p class="card-text mb-5 mt-2">22 thuật ngữ</p>
-										<span class="mt-4">infomation </span>
+									<div class="card-body p-3 d-flex flex-column">
+										<h5 class="card-title"><%=ListCollection.get(i).getCollectionName() %></h5>
+										<div class="mb-5 mt-2"><span class="card-text rounded-pill ps-3 pe-3 pt-1  pb-1" style="background-color: #edefff; font-size: 0.875rem ;font-weight: 600"><%= ListCollection.get(i).getQuantity() %> thuật ngữ</span></div>
+										<span class="badge bg-success p-2 fs-6"> @<%= info.getUserName() %></span>
 									</div>
 								</div>
 							</a>

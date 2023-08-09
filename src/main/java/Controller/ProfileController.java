@@ -1,6 +1,5 @@
 package Controller;
 
-import java.io.Console;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -12,19 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Bean.Dto.UserLoginDto;
-import Bo.UserBo;
 
 /**
- * Servlet implementation class LoginController
+ * Servlet implementation class ProfileController
  */
-@WebServlet("/LoginController")
-public class LoginController extends HttpServlet {
+@WebServlet("/ProfileController")
+public class ProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginController() {
+    public ProfileController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,37 +31,23 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//init
+		try {
+		//-----------init Struct
 		HttpSession session = request.getSession();
-		UserBo UserLog= new UserBo();
-		//-----------
-		//Handle Login
-		String un = (String) request.getParameter("UserName");
-		String pw = (String) request.getParameter("Pass");
-		try {
-		if(un!=null && pw!=null)
-		if(UserLog.Login(un, pw)!=null) {
-			UserLoginDto data = UserLog.Login(un, pw);
-			session.setAttribute("InfoUserLogin",data );
-			response.sendRedirect("GateWayController?Gate=OK");
-			return;
-		}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//------Handle-Logout-----------
-		String out = (String) request.getParameter("out");
-		try {
-			if(out!=null) {
-				session.removeAttribute("InfoUserLogin");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//-------------------------------
-		RequestDispatcher rd = request.getRequestDispatcher("WebContent/Auth/IndexAuth.jsp");
-		rd.forward(request, response);
 		
+		//------------Check-login------------
+		UserLoginDto info = (UserLoginDto) session.getAttribute("InfoUserLogin");
+		if(info == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("LoginController");
+			rd.forward(request, response);
+		}
+		
+		
+		RequestDispatcher rd = request.getRequestDispatcher("WebContent/Profile.jsp");
+		rd.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

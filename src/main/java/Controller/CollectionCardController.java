@@ -1,6 +1,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,19 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Bean.Dto.UserLoginDto;
 import Bo.CollectionBo;
 
 /**
- * Servlet implementation class HomeForUserController
+ * Servlet implementation class CollectionCardController
  */
-@WebServlet("/HomeForUserController")
-public class HomeForUserController extends HttpServlet {
+@WebServlet("/CollectionCardController")
+public class CollectionCardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeForUserController() {
+    public CollectionCardController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +34,35 @@ public class HomeForUserController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-		//--------------init-everything
-		HttpSession session = request.getSession();
-		CollectionBo Collection = new CollectionBo();
-		//------check-if-logged-don't show form login"
-			if(session.getAttribute("InfoUserLogin")==null) {
+			//init struct
+			HttpSession session = request.getSession();
+			CollectionBo CollectBo = new CollectionBo();
+
+			UserLoginDto infoUser = (UserLoginDto) session.getAttribute("InfoUserLogin");
+			session.setAttribute("ListCollection", CollectBo.GetCollectionByDate(true));
+			
+			//--------Check-login-----------
+			
+			if(infoUser == null ) {
 				RequestDispatcher rd = request.getRequestDispatcher("LoginController");
 				rd.forward(request, response);
-				return;
-			}	
-		//-------------Default-Sesion----------------
-			// List info Collection
-			session.setAttribute("ListColletion", Collection.GetAll());
+			}
 			
-		//-------------END-of-Default-Sesion----------
-			RequestDispatcher rd = request.getRequestDispatcher("WebContent/HomeForUser.jsp");
+			//------------Add-collection-card-------------
+			String NameCollect = (String) request.getParameter("NameCollect");
+			String DiscriptCollect = (String) request.getParameter("DiscriptCollect");
+			if( NameCollect !=null && DiscriptCollect !=null) {
+			 CollectionBo CollecBO = new CollectionBo();
+			 CollecBO.Create(infoUser.getUserId(), NameCollect, DiscriptCollect);
+			 response.sendRedirect("GateWayController?Gate=ADD_COLLECTION");
+			}
+			RequestDispatcher rd = request.getRequestDispatcher("WebContent/CollectionCard.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
+		
+		
 	}
 
 	/**

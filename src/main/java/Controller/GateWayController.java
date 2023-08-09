@@ -8,21 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import Bo.CollectionBo;
 
 /**
- * Servlet implementation class HomeForUserController
+ * Servlet implementation class GateWayController
  */
-@WebServlet("/HomeForUserController")
-public class HomeForUserController extends HttpServlet {
+@WebServlet("/GateWayController")
+public class GateWayController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeForUserController() {
+    public GateWayController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +28,28 @@ public class HomeForUserController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-		//--------------init-everything
-		HttpSession session = request.getSession();
-		CollectionBo Collection = new CollectionBo();
-		//------check-if-logged-don't show form login"
-			if(session.getAttribute("InfoUserLogin")==null) {
-				RequestDispatcher rd = request.getRequestDispatcher("LoginController");
+		//--HomeforUser
+		System.out.println("Gate running");
+		String G1 = (String) request.getParameter("Gate");
+		if(G1 !=null) {
+			switch (G1) {
+			case "OK": {
+				RequestDispatcher rd = request.getRequestDispatcher("HomeForUserController");
 				rd.forward(request, response);
-				return;
-			}	
-		//-------------Default-Sesion----------------
-			// List info Collection
-			session.setAttribute("ListColletion", Collection.GetAll());
+				break;
+			}
+			case "ADD_COLLECTION":{
+				RequestDispatcher rd = request.getRequestDispatcher("CollectionCardController");
+				rd.forward(request, response);
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + G1);
+			};
 			
-		//-------------END-of-Default-Sesion----------
-			RequestDispatcher rd = request.getRequestDispatcher("WebContent/HomeForUser.jsp");
-			rd.forward(request, response);
-		} catch (Exception e) {
-			// TODO: handle exception
 		}
+		
+			
 	}
 
 	/**

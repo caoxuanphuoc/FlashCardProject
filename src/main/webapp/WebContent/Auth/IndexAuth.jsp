@@ -23,7 +23,7 @@
 			</div>
 			<div class="col-8 border border-success mt-4 ps-6 p-5 rounded-3 d-flex justify-content-center
 			 position-absolute start-50 translate-middle-x shadow p-3 mb-5 bg-body rounded">
-				<form class="col-10" method="POST">
+				<form class="col-10" action="LoginController" method="get">
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">
 						<b>UserName</b> </label> <input class="form-control" name="UserName"

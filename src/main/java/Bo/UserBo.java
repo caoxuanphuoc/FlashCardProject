@@ -16,7 +16,7 @@ public class UserBo {
 	public UserLoginDto Login(String Un, String Pw) throws Exception{
 		User u = dataUser.Login(Un, Pw);
 		if(u!= null)
-			return new UserLoginDto(u.getFirstName(), u.getLastName(), u.getUserName());
+			return new UserLoginDto(u.getId(), u.getFirstName(), u.getLastName(), u.getUserName());
 		return null;
 	}
 	
