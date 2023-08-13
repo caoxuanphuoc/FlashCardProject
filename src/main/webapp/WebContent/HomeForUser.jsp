@@ -34,14 +34,17 @@
 						for (int i = 0; i < 3; i++) {
 						%>
 						<div class="col-sm-4 ">
-							<a href="https://getbootstrap.com/docs/5.0/migration/#sass"
+							<a href="CollectionDetailController?CollectionId=<%=ListCollection.get(i).getId() %>"
 								class="text-decoration-none text-black">
 								<div class="card shadow-sm p-2 mb-3 bg-body rounded"
 									style="border-radius: 20px !important">
 									<div class="card-body p-3 d-flex flex-column">
 										<h5 class="card-title"><%=ListCollection.get(i).getCollectionName() %></h5>
 										<div class="mb-5 mt-2"><span class="card-text rounded-pill ps-3 pe-3 pt-1  pb-1" style="background-color: #edefff; font-size: 0.875rem ;font-weight: 600"><%= ListCollection.get(i).getQuantity() %> thuật ngữ</span></div>
-										<span class="badge bg-success p-2 fs-6"> @<%= info.getUserName() %></span>
+										<div>
+										<span> <img alt="atv" src="<%= info.getFirstName()%>"> </span>
+										 <span class="badge bg-success p-2 fs-6"> @<%= info.getUserName() %></span>
+										 </div>
 									</div>
 								</div>
 							</a>

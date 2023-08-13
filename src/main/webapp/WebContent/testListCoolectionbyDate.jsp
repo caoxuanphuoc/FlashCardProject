@@ -1,7 +1,5 @@
-<%@page import="Bean.CollectionCard"%>
-<%@page import="Bean.Dto.CollectionByDateDto"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Bo.CollectionBo"%>
+<%@page import="Bo.CardBo"%>
+<%@page import="Bean.Card"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,24 +10,22 @@
 </head>
 <body>
 <h1>CHECK</h1>
-<%-- <%CollectionBo  colecBo1 = new CollectionBo(); 
-ArrayList<CollectionCard> a = colecBo1.GetAll() ;
-	for(CollectionCard xx: a){
+<%-- <%
+	//check dao
+
+	//check bo
+	CardBo a = new CardBo();
+	//a.Delete((long)4);
+	//Card c = new Card((long)4, (long) 6, "phuoc", "BackText", "ImgFront", "ImgBack", false);
+	//int k = a.Update(c);
+	//for( Card x : a.GetAll((long)1)){
 %>
-<h1> <%=xx.getCreateAt() %></h1>
-<%} %> --%>
-
-
-
-<% CollectionBo  colecBo = new CollectionBo();
-
-	ArrayList<CollectionByDateDto> Dsbydate = colecBo.GetCollectionByDate();
-	for( CollectionByDateDto Paren: Dsbydate){
+	<h1> <%=x.toString() %></h1>
+<%//} %> --%>
+<%
+	Card c = new Card((long)4, (long) 7, null, "phuoc", "phuoc" , null ,null);
+	String url = c.RequestURL();
 %>
-<span><%= Paren.getCreatedAt()%></span>
-<%		for( CollectionCard child : Paren.getListCollection()){
-%>
-<h2> <%=child.getCollectionName() %></h2>
-<%}} %> 
+<h1><%=url %></h1>
 </body>
 </html>

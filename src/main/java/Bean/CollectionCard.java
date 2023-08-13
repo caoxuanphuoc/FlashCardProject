@@ -8,15 +8,15 @@ public class CollectionCard {
 	private String CollectionName;
 	private String Describe;
 	private Long Rate;
-	private boolean IsDelete;
-	private int Status;
+	private Boolean IsDelete;
+	private Integer Status;
 	private Date CreateAt;
 	public CollectionCard() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CollectionCard(Long id, Long userId, String collectionName, String describe, Long rate, boolean isDelete,
-			int status, Date createAt) {
+	public CollectionCard(Long id, Long userId, String collectionName, String describe, Long rate, Boolean isDelete,
+			Integer status, Date createAt) {
 		super();
 		Id = id;
 		UserId = userId;
@@ -68,16 +68,16 @@ public class CollectionCard {
 	public void setRate(Long rate) {
 		Rate = rate;
 	}
-	public boolean getIsDelete() {
+	public Boolean getIsDelete() {
 		return IsDelete;
 	}
-	public void setIsDelete(boolean isDelete) {
+	public void setIsDelete(Boolean isDelete) {
 		IsDelete = isDelete;
 	}
-	public int getStatus() {
+	public Integer getStatus() {
 		return Status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		Status = status;
 	}
 	public Date getCreateAt() {

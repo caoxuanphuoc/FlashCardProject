@@ -19,7 +19,10 @@ public class CollectionBo {
 	public CollectionBo() {
 		Collec = new CollectionDao();
 	}
-	
+	//--------Get-by_id
+	public CollectionCard Get(Long Id) throws Exception {
+		return Collec.GetCollection(Id);
+	}
 	//--------GET-ALL--------
 	public ArrayList<Collectiondto> GetAll() throws Exception {
 		ArrayList<CollectionCard> ls = Collec.GetAllCollection();

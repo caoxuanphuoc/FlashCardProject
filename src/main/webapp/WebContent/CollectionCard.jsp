@@ -33,6 +33,7 @@
 	        	</div>
         	</header>
         	<%for(CollectionCard child : paren.getListCollection()) {%>
+        	<a href="CollectionDetailController?CollectionId=<%= child.getId()%>">
           <div class="card mt-3 rounded shadow-sm ">
             <div class="card-body">
               <div class= "row ">
@@ -47,6 +48,7 @@
               </div>
             </div>
           </div><!-- End Default Badges -->
+          </a>
           <%}} %>
         </div>
 

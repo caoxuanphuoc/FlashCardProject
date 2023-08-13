@@ -1,3 +1,6 @@
+<%@page import="Bean.Dto.CollectionDetailDto"%>
+<%@page import="Bean.Card"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,10 +15,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="styleSheet" href="../Style/FlipCard.css">
+    <link rel="styleSheet" href="Style/FlipCard.css">
     <script src="https://kit.fontawesome.com/b220baa0bb.js" crossorigin="anonymous"></script>
 </head>
-
+<!-- init data -->
+<%
+ CollectionDetailDto Collect = (CollectionDetailDto) session.getAttribute("DSCardByID");
+	int CurIndex = 0;
+	int NumberCard = Collect.getListCard().size();
+%>
+                           
 <body style="background-color: #f6f7fb;">
 <%@include file="Share/HeaderForLogged.jsp"%>
     <div class="container">
@@ -24,7 +33,7 @@
                 <!-- Title -->
                 <div class="row pb-3">
                     <div class="col-10">
-                        <h3>READING</h3> <br>
+                        <h3><%=Collect.getCollectionName() %></h3> <br>
                     </div>
                     <div class="col-2 ">
                         <div class="p-2 bg-white text-center shadow-sm bg-body rounded" role="button"> 
@@ -81,13 +90,13 @@
                 <div class="row">
                     <div class="col">
                     <div class="row">
-                        <div class="flip-card col-12 border-0 ">
-                            <div class="flip-card-inner shadow bg-body rounded" id="card">
+                        <div class="flip-card col-12 border-0 " id="FlipCard" >
+                            <div class="flip-card-inner shadow bg-body rounded" id="card" onmouseup ="Flip()">
                                 <div class="flip-card-front rounded">
-                                    <h2>Phuoc</h2>
+                                    <h2><%= Collect.getListCard().get(CurIndex).getFrontText() %></h2>
                                 </div>
                                 <div class="flip-card-back shadow rounded">
-                                    <h2>Phuoc</h2>
+                                    <h2><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
                                 </div>
                             </div>
                         </div>
@@ -99,10 +108,54 @@
                             <div role="button"><i class="fa-solid fa-shuffle" style="font-size: 30px; color: #586380;"></i></div>
                         </div> 
                         <div class="col-3  d-flex align-items-center">
-                            <span role="button"><i class="fa-solid fa-arrow-left" style="font-size: 40px; color: #586380;"></i></span>
-                            <span class="text-center fs-4 ps-3 pe-3" >100/100</span>
-                            <span role="button"><i class="fa-solid fa-arrow-right" style="font-size: 40px; color: #586380;"></i></span>
+                            <span id="bntLeft" role="button"><i class="fa-solid fa-arrow-left" style="font-size: 40px; color: #586380;"></i></span>
+                            <span id="per" class="text-center fs-4 ps-3 pe-3" ><span> <%= CurIndex + 1 %>/<%=NumberCard %> </span></span>
+                            <span  id="bntRight" role="button"><i class="fa-solid fa-arrow-right" style="font-size: 40px; color: #586380;"></i></span>
                         </div>
+                        <!-- Script change -->
+                         <script type="text/javascript">
+	                        document.getElementById("bntRight").addEventListener("click", function() {
+	                        	console.log("click")
+	                            var contentDiv = document.getElementById("FlipCard");
+	                        	var contentDiv2 = document.getElementById("per");
+	                            var currentIndex = <%=CurIndex %>;
+								<% CurIndex++;%>
+								
+								contentDiv2.innerHTML= `<span> <%= CurIndex +1%>/<%=NumberCard %> </span>`;
+	                            	
+	                                //currentIndex = (currentIndex + 1) % arraylist.length;
+									contentDiv.innerHTML = `
+			                            <div class="flip-card-inner shadow bg-body rounded" id="card" onmouseup ="Flip()">
+		                                <div class="flip-card-front rounded">
+		                                    <h2><%= Collect.getListCard().get(CurIndex).getFrontText() %></h2>
+		                                </div>
+		                                <div class="flip-card-back shadow rounded">
+		                                    <h2><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
+		                                </div>
+		                            </div>
+		                        	`; // Thay đổi nội dung sau mỗi giây (có thể điều chỉnh)
+	                        });
+	                        document.getElementById("bntLeft").addEventListener("click", function() {
+	                        	console.log("click")
+	                            var contentDiv = document.getElementById("FlipCard");
+	                            var contentDiv2 = document.getElementById("per");
+	                            var currentIndex = <%=CurIndex %>;
+								<% CurIndex--;%>
+								contentDiv2.innerHTML= `<span> <%= CurIndex +1%>/<%=NumberCard %> </span>`;
+	                                //currentIndex = (currentIndex + 1) % arraylist.length;
+									contentDiv.innerHTML = `
+			                            <div class="flip-card-inner shadow bg-body rounded" id="card" onmouseup ="Flip()">
+		                                <div class="flip-card-front rounded">
+		                                    <h2><%= Collect.getListCard().get(CurIndex).getFrontText() %></h2>
+		                                </div>
+		                                <div class="flip-card-back shadow rounded">
+		                                    <h2><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
+		                                </div>
+		                            </div>
+		                        	`; // Thay đổi nội dung sau mỗi giây (có thể điều chỉnh)
+	                        });       
+                    	</script>  
+                        <!--  End Script change -->
                         <div class="col-3  d-flex">
                             <span><i class="fa-solid fa-gear pe-4 ps-5" style="font-size: 30px; color: #586380;" role="button"></i></span>
                             <span><i class="fa-solid fa-expand" style="font-size: 30px; color: #586380;" role="button"></i></span>
@@ -125,7 +178,7 @@
                             </div>
                         </div>
                         <div class="d-flex">
-                            <span role="button"><i class="fa-solid fa-pen pe-4" style="font-size: 30px; color: #586380;"></i></span>
+                            <a href="CollectionEditController?IdCOllection=<%= Collect.getId()%>"><span ><i class="fa-solid fa-pen pe-4" style="font-size: 30px; color: #586380;"></i></span></a>
                             <span role="button"><i class="fa-solid fa-ellipsis" style="font-size: 30px;color: #586380;"></i></span>
                         </div>
 
@@ -139,7 +192,7 @@
                         <div class="row ">
                             <div class="col d-flex justify-content-between ">
                                 <div>
-                                    <h2>Thuật ngữ trong phần này (XX)</h2>
+                                    <h2>Thuật ngữ trong phần này (<%=NumberCard %>)</h2>
                                 </div>
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
@@ -157,7 +210,7 @@
                         <!-- info option -->
                         <div class="row">
                             <div class="col">
-                                <div class="pt-4"> <h2 style="color: #fd993a;">Đang học (XX)</h2></div>
+                                <div class="pt-4"> <h2 style="color: #fd993a;">Đang học (<%=NumberCard %>)</h2></div>
                                 <div><h5>Bạn đã bắt đầu học những thuật ngữ này. Tiếp tục phát huy nhé! </h5></div>
 
                             </div>
@@ -165,16 +218,27 @@
                         <!-- list card  -->
                         <div class="row">
                             <div class="col">
-                            <% for (int i=0;i<10;i++){ %>
+                            <% 
+                           
+                            if(Collect !=null && Collect.getListCard().size()!=0){
+                            for (Card item : Collect.getListCard()){ %>
                                 <div class="card mt-3 rounded shadow-sm ">
                                     <div class="card-body">
                                         <div class="row ">
-                                            <div class="col-4"> front</div>
-                                            <div class="col-4">Bakc</div>
+                                            <div class="col-4"> <%=item.getFrontText() %></div>
+                                            <div class="col-4"> <%=item.getBackText() %></div>
                                             <div class="col-4   text-end">
                                                 <span role="button"><i class="fa-solid fa-star pe-4" style="font-size: 25px; color: #586380;"></i></span>
                                                 <span role="button"><i class="fa-solid fa-pen" style="font-size: 25px; color: #586380;"></i></span>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}}else{%>
+                                	<div class="card mt-3 rounded shadow-sm ">
+                                    <div class="card-body">
+                                        <div class="row text-center">
+                                            <h2> <i>Bạn chưa có thẻ nào </i></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -188,11 +252,12 @@
     </div>
 
     <script>
+    function Flip() {
         var fr = document.getElementById("card");
-        fr.addEventListener('click', function () {
             fr.classList.toggle('flip')
-        })
+    }
     </script>
+  
     <div class="border-top mt-5 pt-5">
     <%@include file="Share/FooterSimple.jsp"%>
     </div>
