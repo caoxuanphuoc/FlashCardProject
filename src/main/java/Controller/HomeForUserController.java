@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Bean.Dto.UserLoginDto;
 import Bo.CollectionBo;
 
 /**
@@ -35,15 +36,17 @@ public class HomeForUserController extends HttpServlet {
 		//--------------init-everything
 		HttpSession session = request.getSession();
 		CollectionBo Collection = new CollectionBo();
+		UserLoginDto infoUser = (UserLoginDto) session.getAttribute("InfoUserLogin");
+		
 		//------check-if-logged-don't show form login"
-			if(session.getAttribute("InfoUserLogin")==null) {
+			if(infoUser==null) {
 				RequestDispatcher rd = request.getRequestDispatcher("LoginController");
 				rd.forward(request, response);
 				return;
 			}	
 		//-------------Default-Sesion----------------
 			// List info Collection
-			session.setAttribute("ListColletion", Collection.GetAll());
+			session.setAttribute("ListColletion", Collection.GetAllByUser(infoUser.getUserId()));
 			
 		//-------------END-of-Default-Sesion----------
 			RequestDispatcher rd = request.getRequestDispatcher("WebContent/HomeForUser.jsp");

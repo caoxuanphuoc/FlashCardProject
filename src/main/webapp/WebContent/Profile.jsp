@@ -1,3 +1,6 @@
+<%@page import="Bean.Dto.FamousRateViewDto"%>
+<%@page import="Bean.Dto.CollectionDtos.Collectiondto"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -11,6 +14,9 @@
 
 <link rel="styleSheet" href="Style/BaseStyle.css">
 </head>
+<%
+	FamousRateViewDto dataRate = (FamousRateViewDto) session.getAttribute("FamousRate");
+%>
 <body style="background-color: #f6f7fb">
 <%@include file="Share/HeaderForLogged.jsp" %>
    <div class="container pt-5">
@@ -38,9 +44,9 @@
                     </div>
                 </div>
                 <div class="pt-4 d-flex p-1 col-8 col-lg-12 justify-content-between  ">
-                        <div class="d-flex  align-items-center"> <strong>8</strong> <span class="ps-1 pe-1">Following</span></div>
-                        <div class="d-flex  align-items-center"> <strong>811</strong> <span class="ps-1 pe-1">Followes</span></div>
-                        <div class="d-flex  align-items-center"> <strong>810</strong> <span class="ps-1 pe-1">Rate</span></div>
+                        <div class="d-flex  align-items-center"> <strong><%=dataRate.getFollowing() %></strong> <span class="ps-1 pe-1">Following</span></div>
+                        <div class="d-flex  align-items-center"> <strong><%=dataRate.getFollower() %></strong> <span class="ps-1 pe-1">Followes</span></div>
+                        <div class="d-flex  align-items-center"> <strong><%=dataRate.getRate() %></strong> <span class="ps-1 pe-1">Rate</span></div>
                 </div>
                 <p class="pt-4">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -88,19 +94,21 @@
 
                   <!-- Settings Form -->
                   <div class="d-flex flex-wrap col-12 "> 
-                  <%for(int i=0;i<5;i++){ %>
+                  <%
+                  ArrayList<Collectiondto> data = (ArrayList<Collectiondto> ) session.getAttribute("CollectionByProfile");
+                  for(Collectiondto item : data){ %>
                   	<div class="col-sm-4 p-2">
-                    <a href="https://getbootstrap.com/docs/5.0/migration/#sass"
-                        class="text-decoration-none text-black">
                         <div class="card shadow-sm p-2 mb-3 bg-body rounded"
                             style="border-radius: 20px !important">
+                    <a href="CollectionDetailController?CollectionId=<%= item.getId()%>"
+                        class="text-decoration-none text-black" style="height: 200px">
                             <div class="card-body p-3">
-                                <h5 class="card-title">Reading</h5>
-                                <p class="card-text mb-5 mt-2">22 thuật ngữ</p>
-                                <span class="mt-4">infomation </span>
+                                <h5 class="card-title"><%=item.getCollectionName() %></h5>
+                                <p class="card-text mb-5 mt-2"><%=item.getQuantity() %> Thuật ngữ</p>
+                                <span class="mt-4"><%=item.getDescribe() %></span>
                             </div>
-                        </div>
                     </a>
+                        </div>
                 </div>
                 <%} %>
                   </div>

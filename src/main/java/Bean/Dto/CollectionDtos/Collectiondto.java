@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Collectiondto {
 	private Long Id;
 	private Long UserId;
+	private String UserName;
 	private String CollectionName;
 	private String Describe;
 	private Long Rate;
@@ -13,11 +14,12 @@ public class Collectiondto {
 	private Date CreateAt;
 	private int Quantity;
 	
-	public Collectiondto(Long id, Long userId, String collectionName, String describe, Long rate, boolean isDelete,
+	public Collectiondto(Long id, Long userId, String userName, String collectionName, String describe, Long rate, boolean isDelete,
 			int status, Date createAt, int quantity) {
 		super();
 		Id = id;
 		UserId = userId;
+		UserName = userName;
 		CollectionName = collectionName;
 		Describe = describe;
 		Rate = rate;
@@ -25,6 +27,14 @@ public class Collectiondto {
 		Status = status;
 		CreateAt = createAt;
 		Quantity = quantity;
+	}
+
+	public String getUserName() {
+		return UserName;
+	}
+
+	public void setUserName(String userName) {
+		UserName = userName;
 	}
 
 	public Collectiondto() {

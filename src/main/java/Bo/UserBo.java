@@ -3,6 +3,7 @@ package Bo;
 import java.util.ArrayList;
 
 import Bean.User;
+import Bean.Dto.FamousRateViewDto;
 import Bean.Dto.UserLoginDto;
 import Dao.UserDao;
 
@@ -14,10 +15,13 @@ public class UserBo {
 	}
 	
 	public UserLoginDto Login(String Un, String Pw) throws Exception{
-		User u = dataUser.Login(Un, Pw);
-		if(u!= null)
-			return new UserLoginDto(u.getId(), u.getFirstName(), u.getLastName(), u.getUserName());
-		return null;
+			return dataUser.Login(Un, Pw);
+	}
+	public String GetUserNameById(Long UserId) throws Exception{
+		return dataUser.GetUserName(UserId);
+	}
+	public FamousRateViewDto GetFamousRate(Long UserId) throws Exception {
+		return dataUser.GetFamousRate(UserId);
 	}
 	
 }

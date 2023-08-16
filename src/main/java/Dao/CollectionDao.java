@@ -13,13 +13,39 @@ public class CollectionDao {
 	public CollectionDao() {
 		// TODO Auto-generated constructor stub
 	}
+	//--------------------GET-ALL-------------------
+	public ArrayList<CollectionCard> GetAllCollection() throws Exception{
+		ArrayList<CollectionCard> DS = new ArrayList<CollectionCard>();
+		ConnectFCLEDb kn = new ConnectFCLEDb();
+		kn.ketnoi();
+		// b2: tao cau lenh sql
+		String sql = "select * from CollectionCard where IsDelete is null or IsDelete = 0 order by CreateAt desc";
+		// b3: tao cau lenh
+		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		// b4: thuc hien cau lenh
+		ResultSet rs = cmd.executeQuery();
+		while( rs.next()) {
+			long Id = rs.getLong("Id");
+			long UserId = rs.getLong("UserId");
+			String CollectionName = rs.getString("collectionName");
+			String Describe = rs.getString("Describe");
+			long Rate = rs.getLong("rate");
+			Boolean IsDelete = rs.getBoolean("IsDelete");
+			int Status = rs.getInt("Status");
+			Date CreateAt = rs.getDate("CreateAt");
+			DS.add(new CollectionCard(Id, UserId, CollectionName, Describe, Rate, IsDelete, Status, CreateAt));
+		}
+		cmd.close();
+		 kn.cn.close();
+		return DS;
+	}
 	//-------------------Get-By-ID------------------
 	public CollectionCard GetCollection(Long id) throws Exception{
 		CollectionCard Col = new CollectionCard();
 		ConnectFCLEDb kn = new ConnectFCLEDb();
 		kn.ketnoi();
 		// b2: tao cau lenh sql
-		String sql = "select * from CollectionCard where id = ? AND ( IsDelete is null or IsDelete = 0) order by CreateAt desc";
+		String sql = "select * from CollectionCard where id = ? AND( IsDelete is null or IsDelete = 0) order by CreateAt desc";
 		// b3: tao cau lenh
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		// b4: thuc hien cau lenh
@@ -40,15 +66,16 @@ public class CollectionDao {
 		 kn.cn.close();
 		return Col;
 	}
-	//-------------------GET ALL--------------
-	public ArrayList<CollectionCard> GetAllCollection() throws Exception{
+	//-------------------GET ALL-By-IDUSER-------------
+	public ArrayList<CollectionCard> GetAllCollectionByUser(Long idUser) throws Exception{
 		ArrayList<CollectionCard> DS = new ArrayList<CollectionCard>();
 		ConnectFCLEDb kn = new ConnectFCLEDb();
 		kn.ketnoi();
 		// b2: tao cau lenh sql
-		String sql = "select * from CollectionCard where IsDelete is null or IsDelete = 0 order by CreateAt desc";
+		String sql = "select * from CollectionCard where UserId = ? AND (IsDelete is null or IsDelete = 0 )order by CreateAt desc";
 		// b3: tao cau lenh
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
+		cmd.setLong(1, idUser);
 		// b4: thuc hien cau lenh
 		ResultSet rs = cmd.executeQuery();
 		while( rs.next()) {

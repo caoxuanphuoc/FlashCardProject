@@ -6,9 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background-color: #9b4819">
 	  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+<div class="pb-5 ps-5 pt-2 text-white" style="background-color: #9b4819">
+  <footer id="footer ms-5" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>SuvvyEdu</span></strong>. All Rights Reserved
     </div>
@@ -17,8 +18,9 @@
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">SuvvyEdu</a>
+      Designed by <a href="https://bootstrapmade.com/" class="text-white">SuvvyEdu</a>
     </div>
   </footer><!-- End Footer -->
+  </div>
 </body>
 </html>

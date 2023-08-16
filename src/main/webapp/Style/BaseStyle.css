@@ -23,3 +23,20 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.bghover {
+	background-color:  white ;
+}
+
+.bghover:hover{
+	background-color: #edeff4
+}
+.bghoverW {
+	background-color:  #f6f7fb; 
+	transition-duration: 0.5s;
+}
+
+.bghoverW:hover{
+	background-color: #d5d6d9;
+	transition-duration: 0.5s;
+}

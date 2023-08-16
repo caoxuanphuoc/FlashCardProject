@@ -42,10 +42,11 @@ public class AddCardController extends HttpServlet {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		 DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
 		 ServletFileUpload upload = new ServletFileUpload(fileItemFactory);
-//		 String dirUrl1 = request.getServletContext().getRealPath("") +  File.separator + "files";
-//		 response.getWriter().println(dirUrl1);
+
 		 
 		try {
+			request.setCharacterEncoding("UTF-8");
+			response.setCharacterEncoding("UTF-8");
 			String meth = (String) request.getParameter("meth");
 			String IdCoS = (String) request.getParameter("idc");
 			
@@ -83,14 +84,13 @@ for (FileItem fileItem : fileItems) {
 			else//Neu la control
 			{
 				String Name=fileItem.getFieldName();
+				System.out.println("Định nghĩa: "+ fileItem.getString("UTF-8"));
 				if(Name.equals("ThuatNgu"))
-					FrontText = fileItem.getString();
+					FrontText = fileItem.getString("UTF-8");
 				if(Name.equals("DinhNghia"))
-					BackText = fileItem.getString();
+					BackText = fileItem.getString("UTF-8");
 			}
 			}
-		System.out.println("tham so: "+ meth);
-		System.out.println("thuat ngu" + FrontText +" dinh nghia "+ BackText +" src " + ImgBack);
 		CardBo cbo = new CardBo();
 	
 			if(meth.equals("add")) {				
@@ -99,10 +99,8 @@ for (FileItem fileItem : fileItems) {
 				cbo.Create(CollectionId, FrontText, BackText, ImgFront, ImgBack);
 				}
 			}else  {		
-				System.out.println("check method 1 OK ");
 				CardBo Carb = new CardBo();
 				Long idUpdate = Long.parseLong(meth);
-				System.out.println("check method 2: OK");
 				Card cur = Carb.GetById(idUpdate);
 				cur.setCollectionId(CollectionId);
 				cur.setFrontText(FrontText);
@@ -111,7 +109,9 @@ for (FileItem fileItem : fileItems) {
 				Carb.Update(cur);
 			}
 		
-		response.sendRedirect("idUpdate");
+			
+//			RequestDispatcher rd = request.getRequestDispatcher("CollectionDetailController?CollectionId="+IdCoS);
+//			rd.forward(request, response);
 		
 		} catch (FileUploadException e) {
 			e.printStackTrace();

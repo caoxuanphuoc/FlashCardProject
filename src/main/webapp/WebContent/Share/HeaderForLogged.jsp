@@ -10,7 +10,7 @@
 </head>
 <body>
 	<nav
-		class="navbar navbar-expand-lg navbar-light bg-white position-fixed end-0 start-0 "
+		class="navbar navbar-expand-lg navbar-light bg-white position-fixed end-0 start-0"
 		style="z-index: 9999">
 		<div class="container">
 			<a id="tiH" class="navbar-brand fw-bold ms-3" href="HomeForUserController"
@@ -28,28 +28,27 @@
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Bộ sưu tâp </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><a class="dropdown-item" href="#">Bộ sưu tập của bạn</a></li>
+							<li><a class="dropdown-item" href="#">Đang theo dõi</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="CollectionCardController">Tất cả</a></li>
 						</ul></li>
 				</ul>
 				<div class="d-flex justify-content-between col-7">
 					<div>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
+						<form class="d-flex" action="SearchController">
+							<input class="form-control me-2" type="search" name="KeyWord"
 								placeholder="Search" aria-label="Search" style="width: 90%">
-							<button class="btn btn-outline-success" type="submit">Search</button>
+							<input type="submit" Class="btn btn-outline-success"  value="Search">
 						</form>
 					</div>
 					<div>
-						<ul class="navbar-nav me-auto  mb-lg-0 ">
-							<li class="nav-item "">
+						<ul class="navbar-nav me-auto  mb-lg-0 pt-2">
+							<li class="nav-item ">
 		<!---------------------Add-Collection----------------------------- -->
 								<a href="#" class="hv" data-bs-toggle="modal"
 								data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
-									<i class="fa fa-plus-circle p-0 "
-									style="color: #9B4819; font-size: 34px"></i>
+								<i class="fa-solid fa-plus bghover" style="color: #9B4819; font-size: 24px; padding: 5px; border-radius: 50%"></i>
 							</a>
 
 								<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -87,18 +86,18 @@
 
 							</li>
 
-							<li class="nav-item ms-4 hv"><a href="#"><i
-									class="fa far fa-bell" style="color: #9B4819; font-size: 34px"></i></a>
+							<li class="nav-item ms-4 hv" role="button"><a href="#"><i 
+									class="fa far fa-bell bghover" style="color: #9B4819; font-size: 24px ;padding: 5px; border-radius: 50%"></i></a>
 							</li>
 							<li class="nav-item ms-4 me-3">
 								<div class="dropdown">
 									<a id="dropdownMenuButton12" data-bs-toggle="dropdown"
-										aria-expanded="false"><i class="fa fa fa-user"
-										style="color: #9B4819; font-size: 34px"></i> </a>
+										aria-expanded="false"><i role="button" class="fa-regular fa-user bghover" 
+										style="color: #9B4819; font-size: 24px; padding: 5px; border-radius: 50%" ></i> </a>
 									<ul class="dropdown-menu"
 										aria-labelledby="dropdownMenuButton12">
 										<li><a class="dropdown-item" href="ProfileController">Trang cá nhân</a></li>
-										<li><a class="dropdown-item" href="#">Bộ sưu tập</a></li>
+										<li><a class="dropdown-item" href="CollectionCardController">Bộ sưu tập</a></li>
 										<li><a class="dropdown-item"
 											href="LoginController?out=out"> Đăng xuất</a></li>
 									</ul>

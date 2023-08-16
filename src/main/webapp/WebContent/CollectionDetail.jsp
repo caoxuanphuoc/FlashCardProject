@@ -16,13 +16,18 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="styleSheet" href="Style/FlipCard.css">
+    <link rel="styleSheet" href="Style/BaseStyle.css">
     <script src="https://kit.fontawesome.com/b220baa0bb.js" crossorigin="anonymous"></script>
 </head>
 <!-- init data -->
 <%
+	request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
  CollectionDetailDto Collect = (CollectionDetailDto) session.getAttribute("DSCardByID");
 	int CurIndex = 0;
+	session.setAttribute("CurrentIndex", 1);
 	int NumberCard = Collect.getListCard().size();
+	
 %>
                            
 <body style="background-color: #f6f7fb;">
@@ -92,73 +97,55 @@
                     <div class="row">
                         <div class="flip-card col-12 border-0 " id="FlipCard" >
                             <div class="flip-card-inner shadow bg-body rounded" id="card" onmouseup ="Flip()">
-                                <div class="flip-card-front rounded">
-                                    <h2><%= Collect.getListCard().get(CurIndex).getFrontText() %></h2>
+                                <div class="flip-card-front rounded"  >
+                                    <h2 style="padding-top: 25%" ><%= Collect.getListCard().get(CurIndex).getFrontText() %></h2>
                                 </div>
                                 <div class="flip-card-back shadow rounded">
-                                    <h2><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
+                                    <h2 style="padding-top: 25%"><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Start footer card -->
                     <div class="row d-flex justify-content-between pt-4 pb-4">
+                    <!-- Play -->
                         <div class="col-3  d-flex ps-5">
-                            <div class="pe-4" role="button"><i class="fa-solid fa-play pe-auto" style="font-size: 30px; color: #586380;"></i></div>
-                            <div role="button"><i class="fa-solid fa-shuffle" style="font-size: 30px; color: #586380;"></i></div>
+                            <div class="pe-4" role="button"><i class="fa-solid fa-play pe-auto bghoverW rounded-circle p-2" style="font-size: 30px; color: #9b4819;"></i></div>
+                            <div role="button"><i class="fa-solid fa-shuffle bghoverW rounded-circle p-2" style="font-size: 30px; color: #9b4819;"></i></div>
                         </div> 
-                        <div class="col-3  d-flex align-items-center">
-                            <span id="bntLeft" role="button"><i class="fa-solid fa-arrow-left" style="font-size: 40px; color: #586380;"></i></span>
+                        <!-- Left right -->
+                        <div id="ControlCard" class="col-3  d-flex align-items-center">
+                            <span onclick="change('<%= session.getAttribute("CurrentIndex")%>','<%=Collect.getId()%>','L')" id="bntLeft" role="button"><i class="fa-solid fa-chevron-left bghover rounded-circle p-1 ps-2 pe-2 border" style="font-size: 40px; color: #9b4819;"></i></span>
                             <span id="per" class="text-center fs-4 ps-3 pe-3" ><span> <%= CurIndex + 1 %>/<%=NumberCard %> </span></span>
-                            <span  id="bntRight" role="button"><i class="fa-solid fa-arrow-right" style="font-size: 40px; color: #586380;"></i></span>
+                            <span   onclick="change('<%= session.getAttribute("CurrentIndex")%>','<%=Collect.getId()%>','R')" id="bntRight" role="button"><i class="fa-solid fa-chevron-right bghover rounded-circle p-1  ps-2 pe-2 border" style="font-size: 40px; color: #9b4819;"></i></span>
                         </div>
                         <!-- Script change -->
-                         <script type="text/javascript">
-	                        document.getElementById("bntRight").addEventListener("click", function() {
-	                        	console.log("click")
-	                            var contentDiv = document.getElementById("FlipCard");
-	                        	var contentDiv2 = document.getElementById("per");
-	                            var currentIndex = <%=CurIndex %>;
-								<% CurIndex++;%>
-								
-								contentDiv2.innerHTML= `<span> <%= CurIndex +1%>/<%=NumberCard %> </span>`;
-	                            	
-	                                //currentIndex = (currentIndex + 1) % arraylist.length;
-									contentDiv.innerHTML = `
-			                            <div class="flip-card-inner shadow bg-body rounded" id="card" onmouseup ="Flip()">
-		                                <div class="flip-card-front rounded">
-		                                    <h2><%= Collect.getListCard().get(CurIndex).getFrontText() %></h2>
-		                                </div>
-		                                <div class="flip-card-back shadow rounded">
-		                                    <h2><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
-		                                </div>
-		                            </div>
-		                        	`; // Thay đổi nội dung sau mỗi giây (có thể điều chỉnh)
-	                        });
-	                        document.getElementById("bntLeft").addEventListener("click", function() {
-	                        	console.log("click")
-	                            var contentDiv = document.getElementById("FlipCard");
-	                            var contentDiv2 = document.getElementById("per");
-	                            var currentIndex = <%=CurIndex %>;
-								<% CurIndex--;%>
-								contentDiv2.innerHTML= `<span> <%= CurIndex +1%>/<%=NumberCard %> </span>`;
-	                                //currentIndex = (currentIndex + 1) % arraylist.length;
-									contentDiv.innerHTML = `
-			                            <div class="flip-card-inner shadow bg-body rounded" id="card" onmouseup ="Flip()">
-		                                <div class="flip-card-front rounded">
-		                                    <h2><%= Collect.getListCard().get(CurIndex).getFrontText() %></h2>
-		                                </div>
-		                                <div class="flip-card-back shadow rounded">
-		                                    <h2><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
-		                                </div>
-		                            </div>
-		                        	`; // Thay đổi nội dung sau mỗi giây (có thể điều chỉnh)
-	                        });       
-                    	</script>  
+                        <script type="text/javascript">
+                         function change(id, idCollect,ty)  {
+                        	var xhr = new XMLHttpRequest();
+                        	var contentDiv = document.getElementById("FlipCard");
+                        	var ControlDiv = document.getElementById("ControlCard");
+                            xhr.open("GET", "ChangeCardAjax?id="+id +"&IdCollec="+ idCollect+"&Type=" + ty, true);
+                            
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState === XMLHttpRequest.DONE) {
+                                    if (xhr.status === 200) {
+                                    	var res =  xhr.responseText;
+                                    	var arrayEle = res.split("***");
+                                    	contentDiv.innerHTML = arrayEle[0];
+                                    	ControlDiv.innerHTML = arrayEle[1];
+                                    } else {
+                                        console.error("Error:", xhr.statusText);
+                                    }
+                                }
+                            };
+                            xhr.send();
+                        }
+                        </script>
                         <!--  End Script change -->
                         <div class="col-3  d-flex">
-                            <span><i class="fa-solid fa-gear pe-4 ps-5" style="font-size: 30px; color: #586380;" role="button"></i></span>
-                            <span><i class="fa-solid fa-expand" style="font-size: 30px; color: #586380;" role="button"></i></span>
+                            <span><i class="fa-solid fa-gear ms-5 bghoverW rounded-circle p-2 " style="font-size: 30px; color: #9b4819;" role="button"></i></span>
+                            <span><i class="fa-solid fa-expand bghoverW rounded-circle p-2" style="font-size: 30px; color: #9b4819;" role="button"></i></span>
                         </div>
 
                     </div>
@@ -173,13 +160,18 @@
                         <div class="d-flex align-items-center">
                             <img class="rounded-circle me-4" width="60px" src="https://www.analyticsdistrict.com.sg/img/containers/assets/images/profile-images/leezhihuiavatar.png/f17ff8108bc89ae059911e06de23a745.png">
                             <div class="d-flex flex-column ">
-                                <span>Tạo bởi</span>
-                                <span class="fs-5"> <b>Your Name</b></span>
+                                <span><i>Tạo bởi</i></span>
+                                <span class="fs-5"> <i><b>@<%= Collect.getUserName() %></b></i></span>
                             </div>
                         </div>
                         <div class="d-flex">
-                            <a href="CollectionEditController?IdCOllection=<%= Collect.getId()%>"><span ><i class="fa-solid fa-pen pe-4" style="font-size: 30px; color: #586380;"></i></span></a>
-                            <span role="button"><i class="fa-solid fa-ellipsis" style="font-size: 30px;color: #586380;"></i></span>
+                            <a href="CollectionEditController?IdCOllection=<%= Collect.getId()%>"><span ><i class="fa-regular fa-pen-to-square pe-4" style="font-size: 30px; color: #9b4819;"></i></span></a>
+                            <div class="dropdown" role="button">
+                                    <i class="fa-solid fa-ellipsis"  id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 30px;color: #9b4819;"></i>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <li><a class="dropdown-item" href="CollectionEditController?IdCOllectionDelete=<%= Collect.getId()%>">Xóa</a></li>
+                                    </ul>
+                                </div>
                         </div>
 
                     </div>
@@ -196,7 +188,7 @@
                                 </div>
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
-                                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color : #9b4819">
                                         Thông số của bạn
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -228,8 +220,8 @@
                                             <div class="col-4"> <%=item.getFrontText() %></div>
                                             <div class="col-4"> <%=item.getBackText() %></div>
                                             <div class="col-4   text-end">
-                                                <span role="button"><i class="fa-solid fa-star pe-4" style="font-size: 25px; color: #586380;"></i></span>
-                                                <span role="button"><i class="fa-solid fa-pen" style="font-size: 25px; color: #586380;"></i></span>
+                                                <span role="button"><i class="fa-regular fa-star pe-4" style="font-size: 25px; color: #9b4819;"></i></span>
+                                                <span role="button"><i class="fa-solid fa-pen" style="font-size: 25px; color: #9b4819;"></i></span>
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +250,7 @@
     }
     </script>
   
-    <div class="border-top mt-5 pt-5">
+    <div class="border-top mt-5 pt-5 ps-5" style="background-color: #9b4819">
     <%@include file="Share/FooterSimple.jsp"%>
     </div>
 </body>

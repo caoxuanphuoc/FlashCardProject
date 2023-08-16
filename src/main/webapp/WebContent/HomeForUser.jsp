@@ -31,7 +31,9 @@
 						<%
 						ArrayList<Collectiondto>  ListCollection = (ArrayList<Collectiondto>)session.getAttribute("ListColletion");
 						UserLoginDto info = (UserLoginDto)  session.getAttribute("InfoUserLogin");
-						for (int i = 0; i < 3; i++) {
+						for (int i = 0; i < ListCollection.size(); i++) {
+							if(i ==3)
+								break;
 						%>
 						<div class="col-sm-4 ">
 							<a href="CollectionDetailController?CollectionId=<%=ListCollection.get(i).getId() %>"
@@ -42,7 +44,7 @@
 										<h5 class="card-title"><%=ListCollection.get(i).getCollectionName() %></h5>
 										<div class="mb-5 mt-2"><span class="card-text rounded-pill ps-3 pe-3 pt-1  pb-1" style="background-color: #edefff; font-size: 0.875rem ;font-weight: 600"><%= ListCollection.get(i).getQuantity() %> thuật ngữ</span></div>
 										<div>
-										<span> <img alt="atv" src="<%= info.getFirstName()%>"> </span>
+										<span> <img alt="atv" style="width: 25px;" src="https://anhdep123.com/wp-content/uploads/2021/02/anh-avatar-hai-huoc.jpg"> </span>
 										 <span class="badge bg-success p-2 fs-6"> @<%= info.getUserName() %></span>
 										 </div>
 									</div>

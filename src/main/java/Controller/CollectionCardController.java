@@ -39,7 +39,7 @@ public class CollectionCardController extends HttpServlet {
 			CollectionBo CollectBo = new CollectionBo();
 
 			UserLoginDto infoUser = (UserLoginDto) session.getAttribute("InfoUserLogin");
-			session.setAttribute("ListCollection", CollectBo.GetCollectionByDate(true));
+			
 			
 			//--------Check-login-----------
 			
@@ -47,6 +47,7 @@ public class CollectionCardController extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("LoginController");
 				rd.forward(request, response);
 			}
+			session.setAttribute("ListCollection", CollectBo.GetCollectionByDate(infoUser.getUserId() ,true));
 			
 			//------------Add-collection-card-------------
 			String NameCollect = (String) request.getParameter("NameCollect");

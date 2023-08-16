@@ -36,7 +36,7 @@
                             <div class="col-6">
                                 <span role="button">
                                     <span><i class="fa-solid fa-chevron-left"></i></span>
-                                    <a href="CollectionDetailController"><span class="fs-6"> <b>Trở về bộ sưu tập </b></span></a>
+                                    <a href="CollectionDetailController?CollectionId=<%= Data.getId() %>"><span class="fs-6"> <b>Trở về bộ sưu tập </b></span></a>
                                 </span>
                             </div>
                             <div class="col-6 text-end">
@@ -75,8 +75,14 @@
                             </div>
                             <div class="col-6 text-end">
                                 <span role="button" class=" pt-1 pb-1  rounded-circle me-3 shadow-sm"
-                                    style="background-color: #9b4819; font-size: 25px;"><i
-                                        class="fa-solid fa-gear p-2 text-white"></i></span>
+                                    style="background-color: #9b4819; font-size: 25px;">
+                                    <i id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false"
+                                        class="fa-solid fa-gear ps-2 text-white"></i>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                        <li><a class="dropdown-item" href="#">Quản lý quyền</li>
+                                        <li><a class="dropdown-item" href="CollectionEditController?IdCOllectionDelete=<%= Data.getId()%>">Xóa</a></li>
+                                    </ul>
+                                    </span> 
                                 <span role="button" class=" pt-1 pb-1  rounded-circle shadow-sm"
                                     style="background-color: #9b4819; font-size: 25px;"><i
                                         class="fa-solid fa-right-left p-2 text-white"></i></span>
@@ -94,6 +100,8 @@
                     <div class="col" id="ListItem">
                     <!-- Start Item -->
                     <% int index =0; 
+                    response.setCharacterEncoding("utf-8");
+            		request.setCharacterEncoding("utf-8");
                     for( Card item : Data.getListCard()) { index++;%>
                         <div class="row" id="Item">
                             <div class="card mt-3 rounded shadow-sm ">
@@ -103,7 +111,7 @@
                                         <span class="col text-end"><i class="fa-solid fa-trash-can pe-5"></i></span>
                                     </div>
                                    <!--  <div class="row "> -->
-                                    	<form class="subform d-flex row" id="<%= item.getId() %>">
+                                    	<form class="subform d-flex row" id="<%= item.getId() %>" enctype= "multipart/form-data">
                                         <div class="col-5 pt-3"><input name="ThuatNgu" type="text" class="col-12 p-1" value="<%= item.getFrontText() %>"
                                                 style="outline: none; border: none ;border-bottom: 2px solid #726c6c;">
                                             <label>Thuật ngữ</label>
@@ -113,14 +121,18 @@
                                             <label>Định nghĩa</label>
                                         </div>
                                         <div class="col-2 text-center ">
-                                        	
+                                        	<%if(item.getImgBack().length()>0){ %>
+                                        		<img onclick="upfile('file<%=index %>')" role="button" id="fileimg<%=index%>"  src="<%=item.getImgBack() %>" 
+                                                class="card-img-right col-8 " alt="chua co"> 
+                                        	<%}else{ %>
                                         	<span id="subfileimg<%=index%>" onclick="upfile('file<%=index %>')" style="border-style: dotted" class="p-3" role="button">
 	                                        	<i class="fa-regular fa-image mt-3 pt-2 pb-2"></i>
                                         	</span>
+                                        	<%} %>
                                         	<input onchange="preView('fileimg<%=index%>')" id = "file<%=index%>" name="File" type="file" style="display: none">
                                         	
-                                            <img id="fileimg<%=index%>"  src="" style="display: none"
-                                                class="card-img-right col-8 " alt="chua co">                        
+                                            <img onclick="upfile('file<%=index %>')" role="button" id="fileimg<%=index%>"  src="" style="display: none"
+                                                class="card-img-right col-8 " alt="Ảnh">                        
                                         </div>
                                         </form>
                                   <!--   </div> -->
@@ -154,7 +166,9 @@
                         <!-- Start finish buton -->
                         <div class="row pt-5">
                             <div class="text-end">
+                             <a href = "CollectionDetailController?CollectionId=<%= Data.getId() %>">
                                 <span onclick="SendForm(`<%= Data.getId() %>`)" role="button" style="background-color: #9b4819;" class="p-4 text-white shadow rounded fs-5 fw-5 ">Hoàn tất</span>
+                          </a>   
                             </div>
                         </div>
                         <!-- End finish buton -->
@@ -166,9 +180,9 @@
         </div>
     </div>
 
-    <footer style="border-top: 10px solid; margin-top: 100px;">
-
-    </footer>
+    <div class="border-top mt-5 pt-5 ps-5" style="background-color: #9b4819">
+    <%@include file="Share/FooterSimple.jsp"%>
+    </div>
     <script src="Style/JS/EditItem.js"> </script>
     <script type="text/javascript">
     function upfile(key){
@@ -202,13 +216,6 @@
 		function SendForm(collectId) {
 			var listform = document.querySelectorAll(".subform");
 			listform.forEach(function(form) {
-				/* var childs = input.children;
-				for (var i = 0; i < childs.length; i++) {
-					var child = childs[i];
-					console.log(child)
-					console.log(child.className + " = " + child.value)
-				} */
-				console.log("---------------------------"+ form.id)
 				var idUpdate= form.id;
 				var formData = new FormData(form);
 				var xhttp = new XMLHttpRequest();
@@ -225,7 +232,7 @@
 				    // Nếu chuỗi chứa "add"
 				    url = "AddCardController?meth=add&idc="+collectId; // Cập nhật giá trị của URL
 				}
-				xhttp.open("POST", url, false);
+				xhttp.open("POST", url, true);
 				xhttp.send(formData);
 
 			});

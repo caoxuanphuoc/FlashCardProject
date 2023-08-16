@@ -10,25 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
-import Bean.Dto.FamousRateViewDto;
-import Bean.Dto.UserLoginDto;
 import Bean.Dto.CollectionDtos.Collectiondto;
 import Bo.CollectionBo;
-import Bo.UserBo;
 
 /**
- * Servlet implementation class ProfileController
+ * Servlet implementation class SearchController
  */
-@WebServlet("/ProfileController")
-public class ProfileController extends HttpServlet {
+@WebServlet("/SearchController")
+public class SearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProfileController() {
+    public SearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,36 +34,37 @@ public class ProfileController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-		//-----------init Struct
-		HttpSession session = request.getSession();
-		CollectionBo ColecBo = new CollectionBo();
-		UserBo UBo = new UserBo();
 		
-		//------------Check-login------------
-		UserLoginDto info = (UserLoginDto) session.getAttribute("InfoUserLogin");
-		if(info == null) {
-			RequestDispatcher rd = request.getRequestDispatcher("LoginController");
-			rd.forward(request, response);
+		//-------------INIT
+		HttpSession session = request.getSession();
+		CollectionBo CoBo = new CollectionBo();
+		
+		//--------------Search---------------
+		String KeyWord = (String) request.getParameter("KeyWord");
+		if(KeyWord!=null) {
+			ArrayList<Collectiondto> res = CoBo.Search(KeyWord);
+			session.setAttribute("KeyWord", KeyWord);
+			session.setAttribute("ResultSearch", res);
 		}
 		
-		//---------------Get All Collection--------------
-		ArrayList<Collectiondto> dsCo = ColecBo.GetAllByUser(info.getUserId());
-		session.setAttribute("CollectionByProfile", dsCo);
+		//----------------Show Pre view-----------------
+		String idcollect = (String) request.getParameter("ShowPreViewId");
+		if(idcollect!=null) {
+			Long Id = Long.parseLong(idcollect);
+			session.setAttribute("ShowCollect", CoBo.GetColectDetailById(Id));
+		}else {
+			ArrayList<Collectiondto> res = CoBo.Search(KeyWord);
+			if(res.size()>0) {
+				Long IdFirstColection = res.get(0).getId();
+			session.setAttribute("ShowCollect", CoBo.GetColectDetailById(IdFirstColection));
+			}
+		}
 		
-		//----------------Get Rate Famous
-		String IdU = (String) request.getParameter("RateId");
-		FamousRateViewDto Rate = new FamousRateViewDto();
-		if(IdU==null)
-			Rate = UBo.GetFamousRate(info.getUserId());
-		else 
-			Rate = UBo.GetFamousRate(Long.parseLong(IdU));
-		session.setAttribute("FamousRate", Rate);
 		
 		
-		
-		//----------------------------------------------------------------\\
-		RequestDispatcher rd = request.getRequestDispatcher("WebContent/Profile.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("WebContent/SearchPage.jsp");
 		rd.forward(request, response);
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

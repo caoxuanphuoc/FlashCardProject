@@ -46,10 +46,12 @@ public class CollectionDetailController extends HttpServlet {
 			String collecId = (String) request.getParameter("CollectionId");
 			if(collecId!=null) {
 				Long ID = Long.parseLong(collecId);
-				CollectionCard coll = Colb.Get(ID);
-				ArrayList<Card> DSCardByID = cardb.GetAll(ID);
-				CollectionDetailDto Dto = new CollectionDetailDto(coll, DSCardByID);
+				CollectionDetailDto Dto = Colb.GetColectDetailById(ID);
 				session.setAttribute("DSCardByID", Dto);
+				if(Dto.getListCard().size()==0) {
+					RequestDispatcher rd = request.getRequestDispatcher("CollectionEditController?IdCOllection=" + Dto.getId());
+					rd.forward(request, response);
+				}
 			}
 //Xử lý khi không có tham số truyền vào.
 //			else {
@@ -59,6 +61,7 @@ public class CollectionDetailController extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher("WebContent/CollectionDetail.jsp");
 			rd.forward(request, response);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

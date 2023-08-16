@@ -52,11 +52,24 @@ public class CollectionEditController extends HttpServlet {
 		
 		//--------------Get-Collection-dto- form collecton detail
 		String IDString = request.getParameter("IdCOllection");
-		Long Id = Long.parseLong(IDString);
-		CollectionCard coll = Colb.Get(Id);
-		ArrayList<Card> DSCardByID = cardb.GetAll(Id);
-		CollectionDetailDto Dto = new CollectionDetailDto(coll, DSCardByID);
-		session.setAttribute("CollectionForEdit", Dto);
+		if(IDString!=null) {
+			Long Id = Long.parseLong(IDString);
+			CollectionCard coll = Colb.Get(Id);
+			ArrayList<Card> DSCardByID = cardb.GetAll(Id);
+			CollectionDetailDto Dto = new CollectionDetailDto(coll, DSCardByID);
+			session.setAttribute("CollectionForEdit", Dto);
+		}
+		
+		
+		//----------------DELETE COLLECTON-IdCOllectionDelete
+		String IdStringd = (String) request.getParameter("IdCOllectionDelete");
+		if(IdStringd!=null) {			
+		Long idcolectDele = Long.parseLong(IdStringd);
+		Colb.Delete(idcolectDele);
+		RequestDispatcher rd = request.getRequestDispatcher("CollectionCardController");
+		rd.forward(request, response);
+		}
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("WebContent/CollectionCardEdit.jsp");
 		rd.forward(request, response);

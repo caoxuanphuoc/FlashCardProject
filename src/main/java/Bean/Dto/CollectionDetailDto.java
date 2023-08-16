@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 import Bean.Card;
 import Bean.CollectionCard;
+import Bo.UserBo;
 
 public class CollectionDetailDto {
 	private Long Id;
 	private Long UserId;
+	private String UserName;
 	private String CollectionName;
 	private String Describe;
 	private Long Rate;
@@ -19,11 +21,12 @@ public class CollectionDetailDto {
 	public CollectionDetailDto() {
 		// TODO Auto-generated constructor stub
 	}
-	public CollectionDetailDto(Long id, Long userId, String collectionName, String describe, Long rate,
+	public CollectionDetailDto(Long id, Long userId, String userName, String collectionName, String describe, Long rate,
 			boolean isDelete, int status, Date createAt, ArrayList<Card> listCard) {
 		super();
 		Id = id;
 		UserId = userId;
+		UserName = userName;
 		CollectionName = collectionName;
 		Describe = describe;
 		Rate = rate;
@@ -32,10 +35,23 @@ public class CollectionDetailDto {
 		CreateAt = createAt;
 		ListCard = listCard;
 	}
+	public String getUserName() {
+		return UserName;
+	}
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
 	public CollectionDetailDto( CollectionCard col , ArrayList<Card> listCard) {
 		super();
+		UserBo u = new UserBo();
 		Id = col.getId();
 		UserId = col.getUserId();
+		try {
+			
+			UserName = u.GetUserNameById(col.getUserId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		CollectionName = col.getCollectionName();
 		Describe = col.getDescribe();
 		Rate = col.getRate();
