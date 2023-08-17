@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="styleSheet" href="../../Style/bootstrap-5.0.2/dist/css/bootstrap.min.css">
-<link rel="styleSheet" href="../../Style/BaseStyle.css">
+<link rel="styleSheet" href="Style/bootstrap-5.0.2/dist/css/bootstrap.min.css">
+<link rel="styleSheet" href="Style/BaseStyle.css">
 </head>
 <body>
 <div class="pt-3 offset-md-2 d-flex" >
@@ -19,28 +19,30 @@
 			 position-absolute start-50 translate-middle-x shadow p-3 mb-5 bg-body rounded">
 				<form class="col-10">
 					<div class="mb-3">
+						<label  class="form-label"><b> User Name</b></label>
+						<input type="text" class="form-control" id="un" name="username">
+						<div id="NotiUN" class="text-danger"></div>
+					</div>
+					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">
-						<b>Email address</b> </label> <input type="email" class="form-control"
-							id="exampleInputEmail1" aria-describedby="emailHelp">
-						<div id="emailHelp" class="form-text">We'll never share your
-							email with anyone else.</div>
+						<b>Email address</b> </label> 
+						<input type="email" class="form-control"
+							id="email" name="Email" aria-describedby="emailHelp">
+						<div id="NotiEmail" class="text-danger"></div>
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputPassword1" class="form-label"><b> Password</b></label>
 						<input type="password" class="form-control"
-							id="exampleInputPassword1">
+							id="Password1" name="PW">
 					</div>
 					<div class="mb-3">
 						<label for="exampleInputPassword1" class="form-label"><b> Confirm Password</b></label>
 						<input type="password" class="form-control"
-							id="exampleInputPassword1">
-					</div>
-					<div class="mb-3 form-check">
-						<input type="checkbox" class="form-check-input" id="exampleCheck1">
-						<label class="form-check-label" for="exampleCheck1">Remember me</label>
+							id="Password2" name="PWCF">
+							<div id="NotiPass" class="text-danger"></div>
 					</div>
 					<div class="d-flex justify-content-center pt-2">
-				<button class="btn btn-outline-success " >Đăng Ký</button>
+				<div onclick="Reg()" id="reg" class="btn btn-outline-success " >Đăng ký</div>
 					</div>
 				</form>
 

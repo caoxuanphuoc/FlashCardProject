@@ -66,7 +66,7 @@
 								<div class="card-body row d-flex justify-content-between">
 									<!-- Số lượng đã học -->
 									<div class="card col-sm-3 shadow-sm p-2 rounded text-white"
-										style="border-radius: 20px !important; background-color: #ff5139">
+										style="border-radius: 20px !important; background-color: rgb(255,81,57,0.5)">
 										<div class="card-body">
 											<i class='far fa-chart-bar' style='font-size: 40px'></i>
 											<h4 class="pt-2">Số lượng</h4>

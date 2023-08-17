@@ -30,7 +30,7 @@
 	String KeyWord = (String) session.getAttribute("KeyWord");
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
-	int NumberOfInPage = 10;
+	int NumberOfInPage = 5;
 %>
 <body style="background-color: #f6f7fb;">
 <%@include file="Share/HeaderForLogged.jsp"%>
@@ -115,7 +115,7 @@
                 <div class="row">
                 <!-- Start Column Họcphan -->
                     <div class="col-4 ">
-                        <h3>Học phần</h3>
+                        <h3 class="ps-4">Học phần</h3>
                         <div  style="height: 500px; overflow: auto;">
                         <div id="SearchResult">
                         <%
@@ -182,23 +182,27 @@
                         </div>
                     </div>
                     <div class="col-8 ">
-                        <h3>Xem trước</h3>
+                        <h3 class="ps-4">Xem trước</h3>
                         <% 
                         	CollectionDetailDto DataPre = (CollectionDetailDto) session.getAttribute("ShowCollect");
                         %>
-                        <div id="PreView" class="card shadow-sm p-2 mb-3 bg-body rounded"
-                            style="border-radius: 20px !important; height: 500px">
-                            <div class="d-flex justify-content-between p-2">
-                                <div class="d-flex">
-                                    <h2><%=DataPre.getCollectionName() %></h2>
-                                    <span>
-                                        <img alt="atv" style="width: 25px;"
+                        <div id="PreView" class="card shadow-sm p-2 mb-3 bg-body rounded "
+                            style="border-radius: 20px !important; height: 540px">
+                            <div class="d-flex justify-content-between p-2 align-items-center border-bottom">
+                                <div class="d-flex border rounded">
+                                    <div class="d-flex flex-column "> 
+                                    	<span class="   rounded p-1" style="font-size: 20px; font-weight:20px; color: rgb(155,72,25)">
+                                            <img alt="atv" style="width: 25px;"
                                             src="https://anhdep123.com/wp-content/uploads/2021/02/anh-avatar-hai-huoc.jpg">
-                                    </span>
-                                    <div> <span class=" bg-success  rounded p-1" style="font-size: 14px;">
-                                            @<%=DataPre.getUserName() %></span></div>
+                                            @<%=DataPre.getUserName() %> <i class="fa-regular fa-circle-check"></i>
+                                            </span>
+                                        <div class="btn text-white p-1" style="background-color: rgb(155,72,25)"> Follow </div>
+                                    </div>
                                 </div>
-                                <div><a class="btn btn-primary" href="#" role="button">Học</a></div>
+                                <div>
+                                	<h3><%=DataPre.getCollectionName() %></h3>
+                                </div>
+                                <div><a class="btn btn-success" href="#" role="button">Học</a></div>
                             </div>
 
                             <div class="card-body p-3 d-flex flex-column" style="overflow: auto; height: 400px;">

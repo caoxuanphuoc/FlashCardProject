@@ -100,8 +100,15 @@
                                 <div class="flip-card-front rounded"  >
                                     <h2 style="padding-top: 25%" ><%= Collect.getListCard().get(CurIndex).getFrontText() %></h2>
                                 </div>
-                                <div class="flip-card-back shadow rounded">
-                                    <h2 style="padding-top: 25%"><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
+                                <div class="flip-card-back shadow rounded d-flex flex-column align-items-center ">
+                                    <% if(Collect.getListCard().get(CurIndex).getImgBack().length()>0) {%>
+                                	<div class="pt-5">
+                                    <h2 ><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
+                                    	<img class="col-3" alt="anhsau" src="<%=Collect.getListCard().get(CurIndex).getImgBack()%>">
+                                    </div>
+                                    <%}else{ %>
+                                    <h2 style="padding:  25%"><%= Collect.getListCard().get(CurIndex).getBackText() %></h2>
+                                    <%} %>
                                 </div>
                             </div>
                         </div>

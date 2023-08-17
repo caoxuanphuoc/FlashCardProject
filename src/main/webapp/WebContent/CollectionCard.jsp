@@ -37,16 +37,13 @@
           <div class="card mt-3 rounded shadow-sm ">
             <div class="card-body">
               <div class= "row ">
-              	<div class="col-4 d-flex align-items-center"><span class="card-title fs-6 fw-6"><b> <%= paren.getQuantityCardById(child.getId()) %> thuật ngữ </b></span>
+              	<div class="col-4 d-flex align-items-center"><span class="card-title fs-6 "><b> <%= paren.getQuantityCardById(child.getId()) %> thuật ngữ </b></span>
              		<span class="badge bg-success ms-3  p-2"> <b  >@<%= info.getUserName() %></b></span>
               	 </div>
-              	<!--  <div class="col-8 d-flex justify-content-end">
-              	 	<span> <i class="fa-regular fa-trash-can"></i></span>
-              	 </div> -->
               </div>
               <div class="row">
-              	<div class="col-5 d-flex mt-3">
-              		<h4><b><%= child.getCollectionName() %> </b></h4>
+              	<div class="col-5 d-flex mt-1">
+              		<h5><b><%= child.getCollectionName() %> </b></h5>
               	</div> 
               </div>
             </div>

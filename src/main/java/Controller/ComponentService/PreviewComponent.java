@@ -37,7 +37,6 @@ public class PreviewComponent extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
-			
 			HttpSession session = request.getSession();
 			CollectionBo CoBo = new CollectionBo();		
 			CollectionDetailDto resu = new CollectionDetailDto();
@@ -54,17 +53,21 @@ public class PreviewComponent extends HttpServlet {
 				resu= CoBo.GetColectDetailById(IdFirstColection);
 			}
 		}
-			String textHtml ="<div class=\"d-flex justify-content-between p-2\">\r\n"
-					+ "                                <div class=\"d-flex\">\r\n"
-					+ "                                    <h2>" + resu.getCollectionName() +"</h2>\r\n"
-					+ "                                    <span>\r\n"
-					+ "                                        <img alt=\"atv\" style=\"width: 25px;\"\r\n"
+			String textHtml ="<div class=\"d-flex justify-content-between p-2 align-items-center border-bottom\">\r\n"
+					+ "<div class=\"d-flex border rounded\">\r\n"
+					+ "                                    <div class=\"d-flex flex-column \"> \r\n"
+					+ "                                    	<span class=\"   rounded p-1\" style=\"font-size: 20px; font-weight:20px; color: rgb(155,72,25)\">\r\n"
+					+ "                                            <img alt=\"atv\" style=\"width: 25px;\"\r\n"
 					+ "                                            src=\"https://anhdep123.com/wp-content/uploads/2021/02/anh-avatar-hai-huoc.jpg\">\r\n"
-					+ "                                    </span>\r\n"
-					+ "                                    <div> <span class=\" bg-success  rounded p-1\" style=\"font-size: 14px;\">\r\n"
-					+ "                                            @"+ resu.getUserName() +"</span></div>\r\n"
+					+ "                                            @"+ resu.getUserName() +" <i class=\"fa-regular fa-circle-check\"></i>\r\n"
+					+ "                                            </span>\r\n"
+					+ "                                        <div class=\"btn text-white p-1\" style=\"background-color: rgb(155,72,25)\"> Follow </div>\r\n"
+					+ "                                    </div>\r\n"
 					+ "                                </div>\r\n"
-					+ "                                <div><a class=\"btn btn-primary\" href=\"#\" role=\"button\">Học</a></div>\r\n"
+					+ "                                <div>\r\n"
+					+ "                                	<h3>"+ resu.getCollectionName()+"</h3>\r\n"
+					+ "                                </div>\r\n"
+					+ "                                <div><a class=\"btn btn-success\" href=\"#\" role=\"button\">Học</a></div>"                               
 					+ "                            </div>\r\n"
 					+ "\r\n"
 					+ "                            <div class=\"card-body p-3 d-flex flex-column\" style=\"overflow: auto; height: 400px;\">\r\n";

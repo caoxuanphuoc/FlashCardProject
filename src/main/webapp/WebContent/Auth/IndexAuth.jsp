@@ -60,6 +60,37 @@ function Res() {
     xhttp.open("POST", "WebContent/Auth/RegisterForm.jsp", true);
     xhttp.send();
     }
+function Reg()  {
+	var username = document.getElementById("un").value;
+    var email = document.getElementById("email").value;
+    var password1 = document.getElementById("Password1").value;
+    var password2 = document.getElementById("Password2").value;
+   	var xhr = new XMLHttpRequest();
+       xhr.open("POST", "RegController?username="+username +"&email="+ email+ "&password1="+ password1 + "&password2=" + password2, true);
+       
+       xhr.onreadystatechange = function() {
+           if (xhr.readyState === XMLHttpRequest.DONE) {
+               if (xhr.status === 200) {
+            	   var arr = xhr.responseText.split("***");
+            	   if(arr[0]=="Error"){
+	            	   	var unNoti = document.getElementById("NotiUN");
+	            	   	var EmailNoti = document.getElementById("NotiEmail");
+	            	   	var PassNoti = document.getElementById("NotiPass");
+	            	   	console.log("OK: " + xhr.responseText)
+	               		unNoti.innerHTML = arr[1].split("-")[1];
+	            	   	EmailNoti.innerHTML = arr[2].split("-")[1];
+	            	   	PassNoti.innerHTML = arr[3].split("-")[1];
+               		}else{
+               			//console.log("chuyen huong");
+               			window.location.href="GateWayController?Gate=OK";
+               		}
+               } else {
+                   console.error("Error:", xhr.statusText);
+               }
+           }
+       };
+       xhr.send();
+   }
 </script>
 </body>
 </html>

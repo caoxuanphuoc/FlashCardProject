@@ -166,9 +166,9 @@
                         <!-- Start finish buton -->
                         <div class="row pt-5">
                             <div class="text-end">
-                             <a href = "CollectionDetailController?CollectionId=<%= Data.getId() %>">
+                           <!-- <a href = "CollectionDetailController?CollectionId=<%= Data.getId() %>"> -->  
                                 <span onclick="SendForm(`<%= Data.getId() %>`)" role="button" style="background-color: #9b4819;" class="p-4 text-white shadow rounded fs-5 fw-5 ">Hoàn tất</span>
-                          </a>   
+                           <!-- </a>   -->  
                             </div>
                         </div>
                         <!-- End finish buton -->
@@ -222,6 +222,7 @@
 				xhttp.onload = function() {
 					if (xhttp.status === 200) {
 						console.log("Dữ liệu đã được gửi thành công!");
+						window.location.href="CollectionDetailController?CollectionId="+collectId;
 					} else {
 						console.error("Đã xảy ra lỗi: ", xhttp.statusText);
 					}

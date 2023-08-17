@@ -1,5 +1,7 @@
 package Bean;
 
+import java.sql.Date;
+
 public class User {
 
 	private Long Id;
@@ -9,6 +11,10 @@ public class User {
 	private String PassWord;
 	private boolean IsDelete;
 	private boolean IsActive;
+	private String Email;
+	private Date DateOfBirth;
+	private Date CreatedAt;
+	private String Intro;
 	public User() {
 		super();
 	}
@@ -21,8 +27,17 @@ public class User {
 		UserName = userName;
 		IsActive = isActive;
 	}
+	
+	// -------------Create-Account
+	
+	public User(String userName, String passWord, String email) {
+		super();
+		UserName = userName;
+		PassWord = passWord;
+		Email = email;
+	}
 	public User(Long id, String firstName, String lastName, String userName, String passWord, boolean isDelete,
-			boolean isActive) {
+			boolean isActive, String email, Date dateOfBirth, Date createdAt, String intro) {
 		super();
 		Id = id;
 		FirstName = firstName;
@@ -31,6 +46,10 @@ public class User {
 		PassWord = passWord;
 		IsDelete = isDelete;
 		IsActive = isActive;
+		Email = email;
+		DateOfBirth = dateOfBirth;
+		CreatedAt = createdAt;
+		Intro = intro;
 	}
 	public Long getId() {
 		return Id;
@@ -73,6 +92,30 @@ public class User {
 	}
 	public void setIsActive(boolean isActive) {
 		IsActive = isActive;
+	}
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
+	public Date getDateOfBirth() {
+		return DateOfBirth;
+	}
+	public void setDateOfBirth(Date dateOfBirth) {
+		DateOfBirth = dateOfBirth;
+	}
+	public Date getCreatedAt() {
+		return CreatedAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		CreatedAt = createdAt;
+	}
+	public String getIntro() {
+		return Intro;
+	}
+	public void setIntro(String intro) {
+		Intro = intro;
 	}
 	
 	

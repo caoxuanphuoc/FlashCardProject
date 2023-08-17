@@ -72,8 +72,18 @@ public class ChangeCardAjax extends HttpServlet {
                 "    <div class=\"flip-card-front rounded\">" +
                 "        <h2 style=\"padding-top: 25%\">"+ ds.get(newindex-1).getFrontText() +"</h2>" +
                 "    </div>" +
-                "    <div class=\"flip-card-back shadow rounded\">" +
-                "        <h2 style=\"padding-top: 25%\">"+ ds.get(newindex-1).getBackText() +"</h2>" +
+                "    <div class=\"flip-card-back shadow rounded\">";
+				if(ds.get(newindex-1).getImgBack().length()>0) {
+					textHtml = textHtml + "<div class=\"pt-5\">\r\n"
+							+ "                                    <h2 >" +ds.get(newindex-1).getBackText() +"</h2>\r\n"
+							+ "			<img class=\"col-3\" alt=\"anhsau\" src=\""+ds.get(newindex-1).getImgBack()+ "\">\r\n"
+							+ "          </div>";
+				}
+				else {
+					textHtml = textHtml + "<h2 style=\"padding:  25%\">" +ds.get(newindex-1).getBackText() +"</h2>";
+					
+				}
+				textHtml = textHtml +
                 "    </div>" +																				
                 "</div>***"
                 + " <span onclick=\"change('" + newindex +"','" + IdCollec+ "','L')\"  id=\"bntLeft\" role=\"button\"><i class=\"fa-solid fa-chevron-left bghover rounded-circle p-1  ps-2 pe-2 border\" style=\"font-size: 40px; color: #9b4819;\"></i></span>\r\n"
