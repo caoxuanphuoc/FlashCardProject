@@ -33,7 +33,8 @@ public class CollectionDao {
 			Boolean IsDelete = rs.getBoolean("IsDelete");
 			int Status = rs.getInt("Status");
 			Date CreateAt = rs.getDate("CreateAt");
-			DS.add(new CollectionCard(Id, UserId, CollectionName, Describe, Rate, IsDelete, Status, CreateAt));
+			String Password = rs.getString("Password");
+			DS.add(new CollectionCard(Id, UserId, CollectionName, Describe, Rate, IsDelete, Status, CreateAt, Password));
 		}
 		cmd.close();
 		 kn.cn.close();
@@ -60,7 +61,8 @@ public class CollectionDao {
 			Boolean IsDelete = rs.getBoolean("IsDelete");
 			int Status = rs.getInt("Status");
 			Date CreateAt = rs.getDate("CreateAt");
-			Col =new CollectionCard(Id, UserId, CollectionName, Describe, Rate, IsDelete, Status, CreateAt);
+			String Password = rs.getString("Password");
+			Col =new CollectionCard(Id, UserId, CollectionName, Describe, Rate, IsDelete, Status, CreateAt, Password);
 		}
 		cmd.close();
 		 kn.cn.close();
@@ -87,7 +89,8 @@ public class CollectionDao {
 			Boolean IsDelete = rs.getBoolean("IsDelete");
 			int Status = rs.getInt("Status");
 			Date CreateAt = rs.getDate("CreateAt");
-			DS.add(new CollectionCard(Id, UserId, CollectionName, Describe, Rate, IsDelete, Status, CreateAt));
+			String Password = rs.getString("Password");
+			DS.add(new CollectionCard(Id, UserId, CollectionName, Describe, Rate, IsDelete, Status, CreateAt, Password));
 		}
 		cmd.close();
 		 kn.cn.close();
@@ -115,12 +118,12 @@ public class CollectionDao {
 	}
 	//---------------------UPDATE---------------------
 	public int UpdateCollectionCard(Long id, Long userId, String collectionName, String describe, Long rate, boolean isDelete,
-			int status)  throws Exception{
+			int status, String password)  throws Exception{
 		CollectionCard CC = new CollectionCard();
 		ConnectFCLEDb kn = new ConnectFCLEDb();
 		kn.ketnoi();
 		// b2: tao cau lenh sql
-		String sql = "Update  CollectionCard SET userId = ?,collectionName = ?,describe= ?, rate= ?,isDelete= ?,status= ? where Id =?";
+		String sql = "Update  CollectionCard SET userId = ?,collectionName = ?,describe= ?, rate= ?,isDelete= ?,status= ?, Password = ? where Id =?";
 		// b3: tao cau lenh
 		PreparedStatement cmd = kn.cn.prepareStatement(sql);
 		
@@ -130,13 +133,16 @@ public class CollectionDao {
 		cmd.setLong(4, rate);
 		cmd.setBoolean(5, isDelete);
 		cmd.setInt(6, status);
-		cmd.setLong(7, id);
+		cmd.setString(7,password );
+		cmd.setLong(8, id);
 		 int kq = cmd.executeUpdate();
 		 cmd.close();
 		 kn.cn.close();
 		 return kq;
 		
 	}
+	
+	
 	public int DeleteCollectionCard(Long Id)  throws Exception{
 		CollectionCard CC = new CollectionCard();
 		ConnectFCLEDb kn = new ConnectFCLEDb();

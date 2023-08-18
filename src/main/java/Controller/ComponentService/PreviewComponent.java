@@ -12,8 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import Bean.Card;
 import Bean.Dto.CollectionDetailDto;
+import Bean.Dto.UserLoginDto;
 import Bean.Dto.CollectionDtos.Collectiondto;
 import Bo.CollectionBo;
+import Bo.FriendBo;
 
 /**
  * Servlet implementation class PreviewComponent
@@ -38,11 +40,13 @@ public class PreviewComponent extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			HttpSession session = request.getSession();
-			CollectionBo CoBo = new CollectionBo();		
+			CollectionBo CoBo = new CollectionBo();	
+			FriendBo Fbo = new FriendBo(); 
 			CollectionDetailDto resu = new CollectionDetailDto();
 			
 		String KeyWord = (String) request.getParameter("KeyWord");
 		String idcollect = (String) request.getParameter("ShowPreViewId");
+		UserLoginDto DataCurrenUser = (UserLoginDto) session.getAttribute("InfoUserLogin");
 		if(idcollect!=null) {
 			Long Id = Long.parseLong(idcollect);
 			resu = CoBo.GetColectDetailById(Id);
@@ -60,9 +64,16 @@ public class PreviewComponent extends HttpServlet {
 					+ "                                            <img alt=\"atv\" style=\"width: 25px;\"\r\n"
 					+ "                                            src=\"https://anhdep123.com/wp-content/uploads/2021/02/anh-avatar-hai-huoc.jpg\">\r\n"
 					+ "                                            @"+ resu.getUserName() +" <i class=\"fa-regular fa-circle-check\"></i>\r\n"
-					+ "                                            </span>\r\n"
-					+ "                                        <div class=\"btn text-white p-1\" style=\"background-color: rgb(155,72,25)\"> Follow </div>\r\n"
-					+ "                                    </div>\r\n"
+					+ "                                            </span>\r\n";
+		            if( Fbo.IsFollow(DataCurrenUser.getUserId(), resu.getUserId()) ==true){
+		        	 	//UserId - FriendID %>
+		            	textHtml = textHtml+ " <div class=\"btn  p-1\" style=\"border-color: rgb(155,72,25)\"> followed </div>";
+		        	
+			        }else{ 
+			        	
+			        	textHtml = textHtml+ "<div onclick=\"FollowUser('" +DataCurrenUser.getUserId()+ "', '" +resu.getUserId()+ "')\" class=\"btn text-white p-1\" style=\"background-color: rgb(155,72,25)\"> Follow </div>      ";                                  
+			        } 
+					textHtml= textHtml	+ "                                    </div>\r\n"
 					+ "                                </div>\r\n"
 					+ "                                <div>\r\n"
 					+ "                                	<h3>"+ resu.getCollectionName()+"</h3>\r\n"

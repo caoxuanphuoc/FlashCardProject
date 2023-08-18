@@ -84,7 +84,7 @@ public class CollectionBo {
 	//--------UPDATE--------
 	public int Update(CollectionCard CollectCard) throws Exception {
 		return Collec.UpdateCollectionCard(CollectCard.getId(), CollectCard.getUserId(),
-				CollectCard.getCollectionName(), CollectCard.getDescribe(), CollectCard.getRate(), CollectCard.getIsDelete(), CollectCard.getStatus());
+				CollectCard.getCollectionName(), CollectCard.getDescribe(), CollectCard.getRate(), CollectCard.getIsDelete(), CollectCard.getStatus(), CollectCard.getPassword());
 	}
 	
 	//-----------GET-List-CollectionByDateDto

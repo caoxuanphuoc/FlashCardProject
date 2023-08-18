@@ -1,7 +1,7 @@
 function GetPreView(collectId, keyword)  {
             	var xhr = new XMLHttpRequest();
             	var contentDiv = document.getElementById("PreView");
-                xhr.open("GET", "PreviewComponent?ShowPreViewId="+collectId +"&KeyWord="+ keyword, true);
+                xhr.open("GET", "PreviewComponent?ShowPreViewId="+collectId +"&KeyWord="+ keyword , true);
                 
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE) {

@@ -11,12 +11,14 @@ public class CollectionCard {
 	private Boolean IsDelete;
 	private Integer Status;
 	private Date CreateAt;
+	private String Password;
 	public CollectionCard() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
 	public CollectionCard(Long id, Long userId, String collectionName, String describe, Long rate, Boolean isDelete,
-			Integer status, Date createAt) {
+			Integer status, Date createAt, String password) {
 		super();
 		Id = id;
 		UserId = userId;
@@ -25,19 +27,10 @@ public class CollectionCard {
 		Rate = rate;
 		IsDelete = isDelete;
 		Status = status;
-		CreateAt= createAt;
+		CreateAt = createAt;
+		Password = password;
 	}
-	// Create model
-	public CollectionCard(Long id, Long userId, String collectionName, String describe) {
-		super();
-		Id = id;
-		UserId = userId;
-		CollectionName = collectionName;
-		Describe = describe;
-		Rate = (long) 0;
-		IsDelete = false;
-		Status =1;
-	}
+
 	public Long getId() {
 		return Id;
 	}
@@ -85,6 +78,14 @@ public class CollectionCard {
 	}
 	public void setCreateAt(Date createDate) {
 		CreateAt = createDate;
+	}
+
+	public String getPassword() {
+		return Password;
+	}
+
+	public void setPassword(String password) {
+		Password = password;
 	}
 	
 	

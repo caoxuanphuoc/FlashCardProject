@@ -70,6 +70,25 @@ public class CollectionEditController extends HttpServlet {
 		rd.forward(request, response);
 		}
 		
+		//------------------UPDATE-STATUS(role)-FOR-COLLECTION
+		String IdCoUpdate =(String) request.getParameter("IdCoUpdate");
+		String Status =(String) request.getParameter("Status");
+		if(IdCoUpdate!=null && Status!=null) {
+			
+			Long idCo = Long.parseLong(IdCoUpdate);
+			CollectionCard UCollect = Colb.Get(idCo);
+			int st = Integer.parseInt(Status);
+			UCollect.setStatus(st);
+			
+			String PassCollect =(String) request.getParameter("PassCollect");
+			if(PassCollect != null) {
+				UCollect.setPassword(PassCollect);
+			}
+			
+			Colb.Update(UCollect);
+			response.getWriter().write("Cập nhật thành công");
+		}
+		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("WebContent/CollectionCardEdit.jsp");
 		rd.forward(request, response);

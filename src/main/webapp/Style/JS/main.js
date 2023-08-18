@@ -24,7 +24,7 @@ function ChangePassWord(UserId)  {
 					    ResetPassword.value ="";
 					     ResetNewPass.value ="";
 					      ResetReNewPass.value ="";
-					      NotiChange.innerHTML = "Đổi mật khẩu thành công";
+					      showNoti("Suvvy","Đổi mật khẩu thành công")
 	               		}else{
                			NotiPass.innerHTML ="Mật khẩu không hợp lệ"
                			}
@@ -38,3 +38,35 @@ function ChangePassWord(UserId)  {
        
        }
    }
+   
+//-------------NOtify---------------------
+function showNoti(title,message) {
+		var toastTitle = document.getElementById("toastTitle");
+    	var toastMessage = document.getElementById("toastMessage");
+	
+		toastTitle.textContent = title;
+    toastMessage.textContent = message;
+        var toast = new bootstrap.Toast(document.getElementById("liveToast"));
+        toast.show();
+    };
+//--------------SEARCH PAGE-------------------- 
+ //Button Follow
+function FollowUser(userId, friendId) {
+		var xhr = new XMLHttpRequest();
+       xhr.open("POST", "FriendController?UserId="+userId+ "&FriendId="+friendId ,  true);
+       xhr.onreadystatechange = function() {
+           if (xhr.readyState === XMLHttpRequest.DONE) {
+               if (xhr.status === 200) {
+            	  
+               			
+               } else {
+                   console.error("Error:", xhr.statusText);
+               }
+           }
+       };
+       xhr.send();
+    }; 
+  
+  
+  
+  

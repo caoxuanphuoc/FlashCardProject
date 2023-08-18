@@ -1,3 +1,5 @@
+<%@page import="Bean.Dto.UserLoginDto"%>
+<%@page import="Bo.FriendBo"%>
 <%@page import="java.math.MathContext"%>
 <%@page import="java.io.Console"%>
 <%@page import="Bean.Card"%>
@@ -24,10 +26,17 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     	<script src="Style/JS/Search.js" type="text/javascript"></script>
+    	<script src="Style/JS/main.js" type="text/javascript"></script>
+    	<link rel="styleSheet" href="Style/BaseStyle.css">
     </head>
 <%
+	//-----For--Search
 	ArrayList<Collectiondto> DataSearch = (ArrayList<Collectiondto>) session.getAttribute("ResultSearch");
 	String KeyWord = (String) session.getAttribute("KeyWord");
+	//---For--Follow
+	FriendBo Fbo = new FriendBo(); // Follower
+	UserLoginDto DataCurrenUser = (UserLoginDto) session.getAttribute("InfoUserLogin");
+	
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
 	int NumberOfInPage = 5;
@@ -196,7 +205,13 @@
                                             src="https://anhdep123.com/wp-content/uploads/2021/02/anh-avatar-hai-huoc.jpg">
                                             @<%=DataPre.getUserName() %> <i class="fa-regular fa-circle-check"></i>
                                             </span>
-                                        <div class="btn text-white p-1" style="background-color: rgb(155,72,25)"> Follow </div>
+                                         <% 
+                                         if( Fbo.IsFollow(DataCurrenUser.getUserId(), DataPre.getUserId()) ==true){
+                                        	 	//UserId - FriendID %>
+                                        	 <div  class="btn  p-1" style="border-color: rgb(155,72,25)"> followed  </div>
+                                        <%}else{ %>
+                                        	<div onclick="FollowUser('<%=DataCurrenUser.getUserId()%>', '<%=DataPre.getUserId()%>')" class="btn text-white p-1 bnt-borrow" > Follow </div>                                        
+                                        <%} %>
                                     </div>
                                 </div>
                                 <div>

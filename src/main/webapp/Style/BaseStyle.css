@@ -9,6 +9,7 @@
 .ShadowHover :hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 ul, ol {
   margin: 0;
   padding: 0;
@@ -39,4 +40,12 @@ a {
 .bghoverW:hover{
 	background-color: #d5d6d9;
 	transition-duration: 0.5s;
+}
+.bnt-borrow{
+	background-color: rgb(160,82,45); 
+	color: white
+}
+.bnt-borrow:hover{
+	background-color:    #9b4819;
+	box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }

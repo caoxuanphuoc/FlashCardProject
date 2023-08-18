@@ -166,6 +166,19 @@
   </main><!-- End #main -->
 	</div>
 </div>
-
+	<!-- Start noti -->
+		<div class="position-fixed bottom-0 end-0 p-3 " style="z-index: 11">
+		<div id="liveToast" class="toast hide" role="alert"
+			aria-live="assertive" aria-atomic="true">
+			<div class="toast-header d-flex justify-content-between bg-success text-white" >
+					<b id="toastTitle"> class="me-auto">Bootstrap</b>
+				<button type="button" class="btn-close" data-bs-dismiss="toast"
+					aria-label="Close"></button>
+			</div>
+			<div class="toast-body" id="toastMessage">Hello, world! This is a toast message.
+			</div>
+		</div>
+	</div>
+	<!-- End noti -->
 </body>
 </html>

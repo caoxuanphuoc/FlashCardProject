@@ -151,7 +151,7 @@
                         </script>
                         <!--  End Script change -->
                         <div class="col-3  d-flex">
-                            <span><i class="fa-solid fa-gear ms-5 bghoverW rounded-circle p-2 " style="font-size: 30px; color: #9b4819;" role="button"></i></span>
+                            <span ><i class="fa-solid fa-gear ms-5 bghoverW rounded-circle p-2 " style="font-size: 30px; color: #9b4819;" role="button"></i></span>
                             <span><i class="fa-solid fa-expand bghoverW rounded-circle p-2" style="font-size: 30px; color: #9b4819;" role="button"></i></span>
                         </div>
 
