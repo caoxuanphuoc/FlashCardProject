@@ -51,21 +51,39 @@ function showNoti(title,message) {
     };
 //--------------SEARCH PAGE-------------------- 
  //Button Follow
-function FollowUser(userId, friendId) {
+function FollowUser(userId, friendId, unFl) {
 		var xhr = new XMLHttpRequest();
-       xhr.open("POST", "FriendController?UserId="+userId+ "&FriendId="+friendId ,  true);
+		var url ="FriendController?UserId="+userId+ "&FriendId="+friendId;
+		console.log(typeof(unFl));
+		if(unFl== "true")
+			url =url + "&UnFollow=1";
+       xhr.open("GET", url ,  true);
        xhr.onreadystatechange = function() {
            if (xhr.readyState === XMLHttpRequest.DONE) {
                if (xhr.status === 200) {
-            	  
-               			
+				   console.log("hahahah" + unFl )
+				  if(unFl=="unFL"){
+					  console.log("do");
+					  let btn_unfollow = document.getElementById("btn_unfollow");
+	            	  btn_unfollow.classList.toggle('bnt-borrow');
+	            	  btn_unfollow.innerHTML = `Follow <i class="fa-regular fa-square-plus"></i>`;
+					  btn_unfollow.id ="btn_follow";
+	            	  showNoti("Suvvy Social", "Đã hủy follow");
+				  }else{
+					  console.log("ngon");					  
+	            	  let btn_follow = document.getElementById("btn_follow");
+	            	  btn_follow.classList.toggle('btn-unBorrow');
+	            	  btn_follow.innerHTML = `Followed  <i class="fa-regular fa-circle-check"></i>`;
+	            	  btn_follow.id ="btn_unfollow";
+	            	  showNoti("Suvvy Social", "Đã follow");
+				  }
                } else {
                    console.error("Error:", xhr.statusText);
                }
            }
        };
        xhr.send();
-    }; 
+ }; 
   
   
   

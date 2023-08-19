@@ -1,3 +1,4 @@
+<%@page import="Bean.Dto.UserLoginDto"%>
 <%@page import="Bean.Dto.FamousRateViewDto"%>
 <%@page import="Bean.Dto.CollectionDtos.Collectiondto"%>
 <%@page import="java.util.ArrayList"%>
@@ -17,6 +18,7 @@
 </head>
 <%
 	FamousRateViewDto dataRate = (FamousRateViewDto) session.getAttribute("FamousRate");
+	UserLoginDto datainfo = (UserLoginDto) session.getAttribute("InfoUserLogin");
 %>
 <body style="background-color: #f6f7fb">
 <%@include file="Share/HeaderForLogged.jsp" %>
@@ -79,15 +81,23 @@
               </ul>
               <div class="tab-content pt-2">
 
-                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                <div class="tab-pane fade show active profile-overview p-5" id="profile-overview">
                   <h5 class="card-title">About</h5>
-                  <p class="small fst-italic">Là thành viên tích cực của suvvy</p>
+                  <p class="small fst-italic">Là thành viên tích cực của suvvy từ <%=datainfo.getCreatedAt() %></p>
 
                   <h5 class="card-title">Profile Details</h5>
 
-                  <div class="row">
+                  <div class="row pb-2">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">Cao Xuân Phước</div>
+                    <div class="col-lg-9 col-md-8"><%= datainfo.getFirstName() %></div>
+                  </div>
+                  <div class="row pb-2">
+                    <div class="col-lg-3 col-md-4 label ">Email:</div>
+                    <div class="col-lg-9 col-md-8"><%=datainfo.getEmail() %></div>
+                  </div>
+                  <div class="row pb-2">
+                    <div class="col-lg-3 col-md-4 label ">Date of birth:</div>
+                    <div class="col-lg-9 col-md-8"><%=datainfo.getDateOfBirth() %></div>
                   </div>
 
                 </div>
@@ -127,7 +137,7 @@
                       <div class="col-md-8 col-lg-9">
                         <input name="password" type="password" class="form-control" id="Password">
                       </div>
-                      <div id="NotiPass"></div>
+                      <div id="NotiPass" style="font-size: 15px; color: red ; padding-left: 200px"></div>
                     </div>
 
                     <div class="row mb-3">
@@ -135,7 +145,7 @@
                       <div class="col-md-8 col-lg-9">
                         <input name="newpassword" type="password" class="form-control" id="NewPass">
                       </div>
-                      <div id="NotiNewPass"></div>
+                      <div id="NotiNewPass" style="font-size: 15px; color: red ; padding-left: 200px"></div>
                     </div>
 
                     <div class="row mb-3">
@@ -143,7 +153,7 @@
                       <div class="col-md-8 col-lg-9">
                         <input name="renewpassword" type="password" class="form-control" id="ReNewPass">
                       </div>
-                      <div id="NotiReNewPass"></div>
+                      <div id="NotiReNewPass" style="font-size: 15px; color: red ; padding-left: 200px"></div>
                     </div>
 
                     <div class="text-center">
@@ -180,5 +190,9 @@
 		</div>
 	</div>
 	<!-- End noti -->
+	<div class="border-top mt-5 pt-5 ps-5"
+		style="background-color: #9b4819">
+		<%@include file="Share/FooterSimple.jsp"%>
+	</div>
 </body>
 </html>

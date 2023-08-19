@@ -70,7 +70,7 @@
 										<div class="card-body">
 											<i class='far fa-chart-bar' style='font-size: 40px'></i>
 											<h4 class="pt-2">Số lượng</h4>
-											<span style="font-size: 50px; font-weight: normal;">1200</span>
+											<span style="font-size: 50px; font-weight: normal;">26</span>
 										</div>
 									</div>
 									<!-- Ngày học liên tiếp -->
@@ -79,7 +79,7 @@
 										<div class="card-body">
 											<i class='fas fa-chart-line' style='font-size: 40px'></i>
 											<h4 class="pt-2">Ngày học</h4>
-											<span style="font-size: 50px; font-weight: normal;">1200</span>
+											<span style="font-size: 50px; font-weight: normal;">120</span>
 										</div>
 									</div>
 									<!-- SÔ người theo dõi -->
@@ -88,7 +88,7 @@
 										<div class="card-body">
 											<i class='fas fa-sitemap' style='font-size: 40px'></i>
 											<h4 class="pt-2">Theo dõi</h4>
-											<span style="font-size: 50px; font-weight: normal;">1200</span>
+											<span style="font-size: 50px; font-weight: normal;">12</span>
 										</div>
 									</div>
 								</div>
@@ -128,6 +128,9 @@
 
 		</div>
 	</div>
-	<%@include file="Share/Footer.jsp"%>  
+	<div class="border-top mt-5 pt-5 ps-5"
+		style="background-color: #9b4819">
+		<%@include file="Share/FooterSimple.jsp"%>
+	</div>
 </body>
 </html>

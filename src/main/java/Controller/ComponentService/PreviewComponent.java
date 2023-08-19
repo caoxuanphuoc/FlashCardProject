@@ -63,22 +63,21 @@ public class PreviewComponent extends HttpServlet {
 					+ "                                    	<span class=\"   rounded p-1\" style=\"font-size: 20px; font-weight:20px; color: rgb(155,72,25)\">\r\n"
 					+ "                                            <img alt=\"atv\" style=\"width: 25px;\"\r\n"
 					+ "                                            src=\"https://anhdep123.com/wp-content/uploads/2021/02/anh-avatar-hai-huoc.jpg\">\r\n"
-					+ "                                            @"+ resu.getUserName() +" <i class=\"fa-regular fa-circle-check\"></i>\r\n"
-					+ "                                            </span>\r\n";
+					+ "                                            @"+ resu.getUserName() +"</span>\r\n";
 		            if( Fbo.IsFollow(DataCurrenUser.getUserId(), resu.getUserId()) ==true){
 		        	 	//UserId - FriendID %>
-		            	textHtml = textHtml+ " <div class=\"btn  p-1\" style=\"border-color: rgb(155,72,25)\"> followed </div>";
+		            	textHtml = textHtml+ "<div  id=\"btn_unfollow\" onclick=\"FollowUser('" +DataCurrenUser.getUserId()+ "', '" +resu.getUserId()+ "','unFL')\" class=\"btn  p-1 btn-unBorrow\" > Followed  <i class=\"fa-regular fa-circle-check\"></i> </div>";
 		        	
 			        }else{ 
-			        	
-			        	textHtml = textHtml+ "<div onclick=\"FollowUser('" +DataCurrenUser.getUserId()+ "', '" +resu.getUserId()+ "')\" class=\"btn text-white p-1\" style=\"background-color: rgb(155,72,25)\"> Follow </div>      ";                                  
+			        	 
+			        	textHtml = textHtml+ "<div  id=\"btn_follow\" onclick=\"FollowUser('" +DataCurrenUser.getUserId()+ "', '" +resu.getUserId()+ "','FL')\" class=\"btn text-white p-1 bnt-borrow\" > Follow <i class=\"fa-regular fa-square-plus\"></i> </div> ";                                  
 			        } 
 					textHtml= textHtml	+ "                                    </div>\r\n"
 					+ "                                </div>\r\n"
 					+ "                                <div>\r\n"
 					+ "                                	<h3>"+ resu.getCollectionName()+"</h3>\r\n"
 					+ "                                </div>\r\n"
-					+ "                                <div><a class=\"btn btn-success\" href=\"#\" role=\"button\">Học</a></div>"                               
+					+ "                                <div><a class=\"btn btn-success\" href=\"CollectionDetailController?CollectionId="+resu.getId() +"\" role=\"button\">Học</a></div>"                               
 					+ "                            </div>\r\n"
 					+ "\r\n"
 					+ "                            <div class=\"card-body p-3 d-flex flex-column\" style=\"overflow: auto; height: 400px;\">\r\n";

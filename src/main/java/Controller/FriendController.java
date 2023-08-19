@@ -38,14 +38,16 @@ public class FriendController extends HttpServlet {
 		String FriendIdS = request.getParameter("FriendId");
 		
 		if( UserIdS !=null && FriendIdS !=null) {
+			String UnFollow = request.getParameter("UnFollow");
 			Long UserId = Long.parseLong(UserIdS);
 			Long FriendId = Long.parseLong(FriendIdS);
-			if(FBo.IsFollow(UserId, FriendId)) {
-				response.getWriter().write("exist");
+			System.out.println("UnFollow=="+ UnFollow);
+			if(UnFollow == null ) {
+				FBo.SetRelate(UserId, FriendId, true);
 			}else {
-				FBo.CreateFollow(UserId, FriendId);
-				response.getWriter().write("OK");
+				FBo.SetRelate(UserId, FriendId, false);
 			}
+			
 		}
 		
 		} catch (Exception e) {

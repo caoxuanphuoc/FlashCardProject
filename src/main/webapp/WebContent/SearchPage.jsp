@@ -203,21 +203,21 @@
                                     	<span class="   rounded p-1" style="font-size: 20px; font-weight:20px; color: rgb(155,72,25)">
                                             <img alt="atv" style="width: 25px;"
                                             src="https://anhdep123.com/wp-content/uploads/2021/02/anh-avatar-hai-huoc.jpg">
-                                            @<%=DataPre.getUserName() %> <i class="fa-regular fa-circle-check"></i>
+                                            @<%=DataPre.getUserName() %>
                                             </span>
                                          <% 
                                          if( Fbo.IsFollow(DataCurrenUser.getUserId(), DataPre.getUserId()) ==true){
                                         	 	//UserId - FriendID %>
-                                        	 <div  class="btn  p-1" style="border-color: rgb(155,72,25)"> followed  </div>
+                                        	 <div  id="btn_unfollow" onclick="FollowUser('<%=DataCurrenUser.getUserId()%>', '<%=DataPre.getUserId()%>','unFL')" class="btn  p-1 btn-unBorrow" > Followed  <i class="fa-regular fa-circle-check"></i> </div>
                                         <%}else{ %>
-                                        	<div onclick="FollowUser('<%=DataCurrenUser.getUserId()%>', '<%=DataPre.getUserId()%>')" class="btn text-white p-1 bnt-borrow" > Follow </div>                                        
+                                        	<div id="btn_follow" onclick="FollowUser('<%=DataCurrenUser.getUserId()%>', '<%=DataPre.getUserId()%>','FL')" class="btn text-white p-1 bnt-borrow" > Follow <i class="fa-regular fa-square-plus"></i> </div>                                        
                                         <%} %>
                                     </div>
                                 </div>
                                 <div>
                                 	<h3><%=DataPre.getCollectionName() %></h3>
                                 </div>
-                                <div><a class="btn btn-success" href="#" role="button">Học</a></div>
+                                <div><a class="btn btn-success" href="CollectionDetailController?CollectionId=<%=DataPre.getId()%>" role="button">Học</a></div>
                             </div>
 
                             <div class="card-body p-3 d-flex flex-column" style="overflow: auto; height: 400px;">
@@ -256,6 +256,20 @@
     <div class="border-top mt-5 pt-5 ps-5" style="background-color: #9b4819">
     <%@include file="Share/FooterSimple.jsp"%>
     </div>
+    	<!-- Start noti -->
+		<div class="position-fixed bottom-0 end-0 p-3 " style="z-index: 11">
+		<div id="liveToast" class="toast hide" role="alert"
+			aria-live="assertive" aria-atomic="true">
+			<div class="toast-header d-flex justify-content-between bg-success text-white" >
+					<b id="toastTitle"> class="me-auto">Bootstrap</b>
+				<button type="button" class="btn-close" data-bs-dismiss="toast"
+					aria-label="Close"></button>
+			</div>
+			<div class="toast-body" id="toastMessage">Hello, world! This is a toast message.
+			</div>
+		</div>
+	</div>
+	<!-- End noti -->
 </body>
 
 </html>
