@@ -46,7 +46,7 @@ public class GateWayController extends HttpServlet {
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + G1);
 			};
-			
+			//ngon
 		}
 		
 			
